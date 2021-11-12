@@ -18,6 +18,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private Button btnLogin;
     private TextView tvRegister;
     private TextView tvResetPaw;
+    private TextView tvProtocol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         tvRegister.setOnClickListener(this);
         tvResetPaw = findViewById(R.id.tv_reset_paw);
         tvResetPaw.setOnClickListener(this);
+        tvProtocol = findViewById(R.id.tv_protocol);
+        tvProtocol.setOnClickListener(this);
     }
 
     @Override
@@ -54,13 +57,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_login:
-                if (editPhone.getText().length()<11){
+                if (editPhone.getText().length() < 11) {
                     ToastUtils.showShort("请输入正确的手机号码");
                     return;
                 }
-                if (editPaw.getText().length()==0){
+                if (editPaw.getText().length() == 0) {
                     ToastUtils.showShort("请输入密码");
                     return;
                 }
@@ -70,6 +73,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.tv_reset_paw:
                 startActivity(new Intent(this, ResetPAWActivity.class));
+                break;
+            case R.id.tv_protocol:
+                startActivity(new Intent(this, ProtocolActivity.class));
 
                 break;
         }
