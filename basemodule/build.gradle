@@ -1,0 +1,79 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion project.COMPILE_SDK_VERSION as int
+
+    defaultConfig {
+        minSdkVersion project.MIN_SDK_VERSION as int
+        targetSdkVersion project.TARGET_SDK_VERSION as int
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        preRelease{
+            initWith(release)
+        }
+    }
+    //支持Java8
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api 'androidx.constraintlayout:constraintlayout:1.1.3'
+    api 'androidx.appcompat:appcompat:1.1.0'
+    api 'com.google.android.material:material:1.1.0'
+    api 'androidx.recyclerview:recyclerview:1.2.0'
+    api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    api "io.reactivex.rxjava2:rxjava:${RXJAVA_VERSION}"
+    api "io.reactivex.rxjava2:rxandroid:${RXANDROID_VERSION}"
+    api "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION}"
+    api "com.squareup.retrofit2:converter-gson:${RETROFIT_VERSION}"
+    api "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT_VERSION}"
+    api "com.squareup.okhttp3:logging-interceptor:${OKHTTP3_VERSION}"
+    // Rx生命周期管理 RXLIFECYCLE_VERSION = 2.2.1
+    api "com.trello.rxlifecycle2:rxlifecycle-components:${RXLIFECYCLE_VERSION}"
+    api "com.trello.rxlifecycle2:rxlifecycle:${RXLIFECYCLE_VERSION}"
+    // butterknife 的依赖 BUTTERKNIFE_VERSION = 8.8.1
+    api "com.jakewharton:butterknife:${BUTTERKNIFE_VERSION}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTERKNIFE_VERSION}"
+    // glide 的依赖
+    api "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
+    //fastjson
+    api "com.alibaba:fastjson:${FASTJSON_VERSION}"
+    api "com.hjq:xxpermissions:${XX_PERMISSIONS}"
+    api 'me.jessyan:autosize:1.2.1'
+    api 'com.gyf.immersionbar:immersionbar:3.0.0'
+    api 'com.scwang.smart:refresh-layout-kernel:2.0.1'
+    api 'com.scwang.smart:refresh-footer-classics:2.0.1'
+
+
+
+    implementation   'com.alibaba:arouter-api:1.5.0'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    api 'ywl.ywl5320:libmusic:1.2.6'
+}

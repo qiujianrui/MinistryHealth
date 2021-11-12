@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="23dp"
+    tools:background="#ffffff">
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_marginRight="70dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ff666666"
+        android:textSize="8sp"
+        android:visibility="visible"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="20dp"
+        tools:text="2020-04-13 14:30" />
+
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:paddingRight="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_time"
+        app:layout_goneMarginTop="10dp">
+
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toLeftOf="@+id/tv_icon"
+            android:background="@drawable/shape_chat_right_text"
+            android:lineSpacingExtra="3dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:textColor="#ff332222"
+            android:textIsSelectable="true"
+            android:textSize="14sp"
+            tools:text="两性方面的问想咨询一些关于两性方面的问想咨询一些关于两性方面的问" />
+
+        <ImageView
+            android:id="@+id/tv_icon"
+            android:layout_width="45.5dp"
+            android:layout_height="45.5dp"
+            android:layout_alignParentRight="true"
+            tools:background="#DAD8D8" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

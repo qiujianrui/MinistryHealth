@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.yhjx.ministryhealth">
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        tools:replace="android:allowBackup"
+        android:theme="@style/Theme.MinistryHealth">
+        <activity
+            android:name="com.yhjx.ministryhealth.ui.home.QuestionnaireActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.yhjx.ministryhealth.ui.consult.ConsultMainActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.yhjx.ministryhealth.ui.home.AddRecordActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.yhjx.ministryhealth.ui.home.AddRemindActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.yhjx.ministryhealth.ui.home.RemindActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.yhjx.ministryhealth.ui.home.MedicineRecordActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.yhjx.ministryhealth.ui.home.MessageDetailActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.yhjx.ministryhealth.ui.home.NotificationMessageActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.yhjx.ministryhealth.ui.login.ResetPAWActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.yhjx.ministryhealth.ui.login.RegisterActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.yhjx.ministryhealth.ui.login.LoginActivity"
+            android:exported="true" />
+
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="360" />
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="640" />
+
+        <activity
+            android:name="com.yhjx.ministryhealth.MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".push.PushMessageIntentService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_REMOVED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.sdk.android.push.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.huawei.hms.client.appid"
+            android:value="appid=104963009" />
+
+        <meta-data
+            android:name="com.vivo.push.api_key"
+            android:value="56d19829c3b80a7cb0bd4a1d1f0fdded" />
+        <meta-data
+            android:name="com.vivo.push.app_id"
+            android:value="105522461" />
+    </application>
+
+</manifest>

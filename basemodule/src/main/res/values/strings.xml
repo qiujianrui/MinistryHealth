@@ -1,0 +1,13 @@
+<resources>
+    <string name="connect_error">网络连接失败,请检查网络</string>
+    <string name="connect_timeout">连接超时,请稍后再试</string>
+    <string name="bad_network">服务器异常</string>
+    <string name="parse_error">解析服务器响应数据失败</string>
+    <string name="unknown_error">未知错误</string>
+    <string name="tv_confirm">确认</string>
+    <string name="tv_cancel">取消</string>
+    <string name="page_error">网络开小差了</string>
+    <string name="page_error_retry">点击重试</string>
+    <string name="page_empty">暂无信息</string>
+    <string name="upload_file_error">图片上传失败，请重新上传</string>
+</resources>
