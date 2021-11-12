@@ -1,10 +1,16 @@
 package com.yhjx.ministryhealth.manager;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.util.Log;
 
-
+import com.alibaba.sdk.android.push.CloudPushService;
+import com.alibaba.sdk.android.push.CommonCallback;
+import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.library.basemodule.util.SPUtils;
 import com.library.basemodule.util.ToastUtils;
+import com.library.basemodule.util.Utils;
+import com.yhjx.ministryhealth.ui.login.LoginActivity;
 
 
 import java.lang.ref.WeakReference;
@@ -131,21 +137,21 @@ public class AppManager {
      * 退出登录
      * */
     public void Logout(){
-//        CloudPushService mPushService = PushServiceFactory.getCloudPushService();
-//        mPushService.unbindAccount(new CommonCallback() {
-//            @Override
-//            public void onSuccess(String s) {
-//                Log.d("推送", "onSuccess: 解绑成功");
-//            }
-//
-//            @Override
-//            public void onFailed(String s, String s1) {
-//                Log.d("推送", "onSuccess: 解绑失败"+s+"---"+s1);
-//            }
-//        });
+        CloudPushService mPushService = PushServiceFactory.getCloudPushService();
+        mPushService.unbindAccount(new CommonCallback() {
+            @Override
+            public void onSuccess(String s) {
+                Log.d("推送", "onSuccess: 解绑成功");
+            }
+
+            @Override
+            public void onFailed(String s, String s1) {
+                Log.d("推送", "onSuccess: 解绑失败"+s+"---"+s1);
+            }
+        });
         finishAllActivity();
         SPUtils.getInstance().clear();
-       // Utils.getApp().getApplicationContext().startActivity(new Intent(Utils.getApp().getApplicationContext(), LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        Utils.getApp().getApplicationContext().startActivity(new Intent(Utils.getApp().getApplicationContext(), LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
     }
 
