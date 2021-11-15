@@ -5,7 +5,8 @@ import com.library.basemodule.net.GsonDConverterFactory;
 import com.library.basemodule.net.HttpCacheInterceptor;
 import com.library.basemodule.util.LogUtils;
 import com.library.basemodule.util.Utils;
-import com.mirrorego.counselor.BuildConfig;
+import com.yhjx.ministryhealth.BuildConfig;
+
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -60,7 +61,7 @@ public class AppHttpUtils {
                 .client(okHttpClientBuilder.build())
                 .addConverterFactory(GsonDConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(UrlConstants.BASE_URL)
+                .baseUrl(UrlConstants.APP_HOST)
                 .build();
         mApiService = retrofit.create(ApiService.class);
     }

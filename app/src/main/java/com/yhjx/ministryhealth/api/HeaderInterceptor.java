@@ -3,8 +3,9 @@ package com.yhjx.ministryhealth.api;
 
 import com.library.basemodule.util.SPUtils;
 import com.library.basemodule.util.StringUtils;
-import com.mirrorego.counselor.BuildConfig;
-import com.mirrorego.counselor.constants.SpConstants;
+import com.yhjx.ministryhealth.BuildConfig;
+import com.yhjx.ministryhealth.constants.SpConstants;
+
 
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public class HeaderInterceptor implements Interceptor {
        if (!StringUtils.isEmpty(Phone)) {
            build.header("Phone", Phone);
        }
-       build.addHeader("Version", BuildConfig.API_VERSION);
+       build.addHeader("Version", BuildConfig.VERSION_NAME);
        build.addHeader("Channel", "1");
        return chain.proceed(build.build());
    }

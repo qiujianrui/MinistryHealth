@@ -13,8 +13,11 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'x86'
+        }
     }
 
     signingConfigs {
@@ -34,6 +37,14 @@ android {
 
     buildTypes {
         release {
+            resValue "string", "app_name", "阳光信箱"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "APP_HOST", API_RELEASE_URL
+        }
+        debug{
+            resValue "string", "app_name", "阳光信箱(测试版)"
+            buildConfigField "String", "APP_HOST", API_DEBUG_URL
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -58,6 +69,7 @@ dependencies {
     implementation project(path: ':ncalendar')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    implementation 'com.aliyun.ams:alicloud-android-push:3.7.0'
     //华为依赖
     implementation 'com.aliyun.ams:alicloud-android-third-push-huawei:3.7.0'
 //小米依赖
