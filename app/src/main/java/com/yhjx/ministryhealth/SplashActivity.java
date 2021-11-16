@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.library.basemodule.util.SPUtils;
 import com.yhjx.ministryhealth.base.BaseActivity;
+import com.yhjx.ministryhealth.constants.SpConstants;
 import com.yhjx.ministryhealth.ui.login.LoginActivity;
 
 
@@ -31,7 +32,11 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void gotoActivity() {
-
-        startActivity(new Intent(this, LoginActivity.class));
+        if (SPUtils.getInstance().getString(SpConstants.SP_KEY_PHONE).isEmpty()){
+            startActivity(new Intent(this, LoginActivity.class));
+        }else {
+            startActivity(new Intent(this, MainActivity.class));
+        }
+        finish();
     }
 }

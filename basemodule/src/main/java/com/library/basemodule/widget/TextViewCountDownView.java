@@ -23,7 +23,11 @@ public class TextViewCountDownView extends AppCompatTextView {
 	 */
 	private CountDownTimer countDownTimer;
 	private Resources resources;
+	public boolean isCountDown;
 
+	public boolean isCountDown() {
+		return isCountDown;
+	}
 
 	public TextViewCountDownView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -45,6 +49,7 @@ public class TextViewCountDownView extends AppCompatTextView {
 		countDownTimer = new CountDownTimer(timeRemaining, 1000 - 10) {
 			@Override
 			public void onTick(long time) {
+				isCountDown=true;
 				long time1 = (time + 15) / 1000;
 				// 第一次调用会有1-10ms的误差，因此需要+15ms，防止第一个数不显示，第二个数显示2s
 				setText(time1 + "s后获取");
@@ -57,6 +62,7 @@ public class TextViewCountDownView extends AppCompatTextView {
 
 			@Override
 			public void onFinish() {
+				isCountDown=false;
 				setEnabled(true);
 				setSelected(true);
 				setText("重新获取");

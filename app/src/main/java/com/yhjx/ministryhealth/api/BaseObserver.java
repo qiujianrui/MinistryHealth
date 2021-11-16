@@ -87,14 +87,14 @@ public abstract class BaseObserver<T extends BaseEntity> implements Observer<T>,
     @Override
     public void onNext(T response) {
         dismissProgress();
-        if (response.isOk(response.getRet())) {
+        if (response.isOk(response.getCode())) {
             //0为成功的状态
             onSuccess(response);
         } else {
             if (isToast) {
-                ToastUtils.showShort(response.getErrMsg());
+                ToastUtils.showShort(response.getMsg());
             }
-            onFailure(response.getRet(), response.getErrMsg());
+            onFailure(response.getCode(), response.getMsg());
 
         }
     }
@@ -120,8 +120,7 @@ public abstract class BaseObserver<T extends BaseEntity> implements Observer<T>,
                     }
                     onFailure(exception.getCode(), exception.getMsg());
                     break;
-                case BaseEntity.LOGOUT_1:
-                case BaseEntity.LOGOUT_2:
+                case BaseEntity.LOGOUT:
                     //处理登录失效
                     ToastUtils.showLong(exception.getMsg());
                     AppManager.getAppManager().Logout();

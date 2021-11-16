@@ -50,11 +50,11 @@
             android:src="@mipmap/ic_category"
             android:layout_marginLeft="25dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/edit_title"
-            app:layout_constraintTop_toTopOf="@+id/edit_title"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_old_paw"
+            app:layout_constraintTop_toTopOf="@+id/edit_old_paw"
             />
         <EditText
-            android:id="@+id/edit_title"
+            android:id="@+id/edit_old_paw"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_edit_line_oval"
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape_edit_line_oval"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_title"
+            app:layout_constraintTop_toBottomOf="@+id/edit_old_paw"
             app:layout_constraintLeft_toRightOf="@+id/id_img_time"
             android:hint="请输入药品名称"
             android:textColor="#ff999999"

@@ -101,11 +101,18 @@
             android:layout_marginTop="10dp"
             />
         <com.necer.calendar.MonthCalendar
+            android:id="@+id/calendar_month"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             app:showLunar="false"
+            app:pointLocation="down"
+            app:todayCheckedBackground="@drawable/n_bg_checked_default"
+            app:defaultCheckedBackground="@drawable/n_bg_checked_default"
             app:calendarBackground="@color/colorContentBg"
             />
+
+<!--        app:todayCheckedSolarTextColor="@color/N_defaultSolarTextColor"-->
+<!--        app:todayUnCheckedSolarTextColor="@color/N_defaultSolarTextColor"-->
     </LinearLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -216,6 +223,7 @@
             android:textSize="12sp"
             />
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_content"
             app:layout_constraintTop_toBottomOf="@+id/id_tv_today"
             android:layout_marginTop="15dp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -24,16 +24,21 @@ public class HeaderInterceptor implements Interceptor {
    public Response intercept(Chain chain) throws IOException {
        String token = SPUtils.getInstance().getString(SpConstants.SP_KEY_USER_TOKEN);
        String Phone = SPUtils.getInstance().getString(SpConstants.SP_KEY_PHONE);
+       String patientId = SPUtils.getInstance().getString(SpConstants.SP_KEY_PATIENT_ID);
+
        Request.Builder build = chain.request().newBuilder();
        // 添加token
        if (!StringUtils.isEmpty(token)) {
-           build.header("Token", token);
+           build.header("token", token);
        }
        if (!StringUtils.isEmpty(Phone)) {
-           build.header("Phone", Phone);
+           build.header("phone", Phone);
        }
-       build.addHeader("Version", BuildConfig.VERSION_NAME);
-       build.addHeader("Channel", "1");
+       if (!StringUtils.isEmpty(Phone)) {
+           build.header("patientId", patientId);
+       }
+       build.addHeader("version", BuildConfig.VERSION_NAME);
+       build.addHeader("channel", "1");
        return chain.proceed(build.build());
    }
 }

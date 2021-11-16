@@ -58,13 +58,14 @@
             android:paddingBottom="15dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:lines="11"
+            android:maxLength="11"
             android:inputType="number"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             />
 
         <com.library.basemodule.widget.TextViewCountDownView
+            android:id="@+id/btn_code"
             android:minWidth="68dp"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -75,7 +76,7 @@
             android:text="发送验证码"
             android:textColor="#ffffffff"
             android:textSize="10sp"
-            android:background="@drawable/shape_btn_main_oval"
+            android:background="@drawable/selector_btn_code"
             app:layout_constraintTop_toTopOf="@+id/edit_phone"
             app:layout_constraintBottom_toBottomOf="@+id/edit_phone"
             app:layout_constraintRight_toRightOf="@+id/edit_phone"

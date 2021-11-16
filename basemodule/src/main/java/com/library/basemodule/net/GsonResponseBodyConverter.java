@@ -38,12 +38,12 @@ public final class GsonResponseBodyConverter<T> implements Converter<ResponseBod
         try {
             // 这里的type实际类型是 HttpResult<PhoneBean>  PhoneBean就是retData要获取的对象。
             BaseEntity result = gson.fromJson(response, BaseEntity.class);
-            if (result.isOk(result.getRet())) {
+            if (result.isOk(result.getCode())) {
                 return gson.fromJson(response, type);
             } else {
                 Log.d("HttpManager", "返回err==：" + response);
                 BaseEntity entity = gson.fromJson(response, BaseEntity.class);
-                throw new ApiException(entity.getRet(), entity.getErrMsg());
+                throw new ApiException(entity.getCode(), entity.getMsg());
             }
         } finally {
             value.close();

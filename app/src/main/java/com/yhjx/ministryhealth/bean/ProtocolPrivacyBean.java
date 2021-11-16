@@ -1,42 +1,41 @@
 package com.yhjx.ministryhealth.bean;
 
-import com.library.basemodule.entity.BaseEntity;
 
-public class ProtocolPrivacyBean extends BaseEntity {
-    public String ProtocolTitle;
-    public String ProtocolContent;     // 用户协议内容
-    public String PrivacyTitle;
-    public String PrivacyContent; // 用户隐私内容
+public class ProtocolPrivacyBean  {
+    public String protocolTitle;
+    public String protocolContent;     // 用户协议内容
+    public String privacyTitle;
+    public String privacyContent; // 用户隐私内容
 
     public String getProtocolTitle() {
-        return ProtocolTitle;
+        return protocolTitle;
     }
 
     public void setProtocolTitle(String protocolTitle) {
-        ProtocolTitle = protocolTitle;
+        this.protocolTitle = protocolTitle;
     }
 
     public String getProtocolContent() {
-        return ProtocolContent;
+        return protocolContent;
     }
 
     public void setProtocolContent(String protocolContent) {
-        ProtocolContent = protocolContent;
+        this.protocolContent = protocolContent;
     }
 
     public String getPrivacyTitle() {
-        return PrivacyTitle;
+        return privacyTitle;
     }
 
     public void setPrivacyTitle(String privacyTitle) {
-        PrivacyTitle = privacyTitle;
+        this.privacyTitle = privacyTitle;
     }
 
     public String getPrivacyContent() {
-        return PrivacyContent;
+        return privacyContent;
     }
 
     public void setPrivacyContent(String privacyContent) {
-        PrivacyContent = privacyContent;
+        this.privacyContent = privacyContent;
     }
 }

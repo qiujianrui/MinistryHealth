@@ -2,6 +2,7 @@ package com.yhjx.ministryhealth.mvp.presenter;
 
 import android.app.Activity;
 
+import com.library.basemodule.entity.BaseEntity;
 import com.library.basemodule.mvp.BasePresenter;
 import com.library.basemodule.net.RxHelper;
 import com.yhjx.ministryhealth.api.AppHttpUtils;
@@ -19,11 +20,12 @@ public class ProtocolAndPrivacyPresenter extends BasePresenter<ProtocolAndPrivac
     public void getProtocolAndPrivacy() {
         AppHttpUtils.getApiService().protocolAndPrivacy()
                 .compose(RxHelper.ioMain())
-                .subscribe(new BaseObserver<ProtocolPrivacyBean>(activityRef.get()) {
+                .subscribe(new BaseObserver<BaseEntity<ProtocolPrivacyBean>>(activityRef.get()) {
+
 
                     @Override
-                    public void onSuccess(ProtocolPrivacyBean result) {
-                        getView().protocolAndPrivacySuccess(result);
+                    public void onSuccess(BaseEntity<ProtocolPrivacyBean> result) {
+                        getView().protocolAndPrivacySuccess(result.getData());
                     }
 
                     @Override
