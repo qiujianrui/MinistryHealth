@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/shape_f2f7ff_5"
     android:paddingLeft="22dp"
     android:paddingRight="22dp"
@@ -10,18 +11,17 @@
     android:paddingBottom="15dp"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    android:layout_marginBottom="10dp"
-    >
+    android:layout_marginBottom="10dp">
     <TextView
         android:id="@+id/tv_time_end_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="9:30"
+        android:text="00:30"
         android:textColor="#ff333333"
         android:textSize="12sp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="@+id/tv_time_end"
-        android:layout_marginLeft="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+
         />
 
     <TextView
@@ -54,7 +54,7 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="益气糖浆胶囊"
+        tools:text="益气糖浆胶囊"
         android:textColor="#ff333333"
         android:textSize="12sp"
         android:layout_marginLeft="11dp"

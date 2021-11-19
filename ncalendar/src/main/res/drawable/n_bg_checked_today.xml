@@ -3,8 +3,7 @@
 android:shape="oval"
 android:useLevel="false">
 
-<stroke
-    android:width="@dimen/N_checkedHollowCircleStroke"
+<solid
     android:color="@color/N_hollowCircleColor" />
 <size
     android:width="@dimen/N_checkedCircleRadius"

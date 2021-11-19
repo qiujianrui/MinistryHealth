@@ -69,6 +69,8 @@ dependencies {
     implementation project(path: ':ncalendar')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
     implementation 'com.aliyun.ams:alicloud-android-push:3.7.0'
     //华为依赖
     implementation 'com.aliyun.ams:alicloud-android-third-push-huawei:3.7.0'

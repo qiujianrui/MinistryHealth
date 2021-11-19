@@ -46,8 +46,9 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_back"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -100,109 +101,121 @@
             android:background="@color/colorContentBg"
             android:layout_marginTop="10dp"
             />
-        <com.necer.calendar.MonthCalendar
+        <com.necer.calendar.Miui10Calendar
+            android:id="@+id/calendar_month"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            app:showLunar="true"
-            app:todayCheckedPoint="@drawable/n_point_checked_default"
-            app:todayUnCheckedPoint="@drawable/n_point_checked_default"
-            app:defaultCheckedPoint="@drawable/n_point_checked_default"
-            app:defaultUnCheckedPoint="@drawable/n_point_checked_default"
+            android:layout_height="match_parent"
+            app:showLunar="false"
+            app:pointLocation="down"
+            app:lunarTextSize="14sp"
+            app:solarTextSize="14sp"
+            app:stretchTextColor="#333333"
+            app:todayCheckedSolarTextColor="#333333"
+            app:todayUnCheckedSolarTextColor="#333333"
             app:todayCheckedBackground="@drawable/n_bg_checked_default"
             app:defaultCheckedBackground="@drawable/n_bg_checked_default"
             app:calendarBackground="@color/colorContentBg"
-            />
+            >
+            <!--  app:calendarBackground="@color/colorContentBg"-->
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#71C1EC"
+                >
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_calendar"
+                    android:background="@drawable/shape_f0f0f0_6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="10dp"
+                    >
+                    <View
+                        android:id="@+id/id_red_point"
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:background="@drawable/shape_red_point"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:layout_marginLeft="30dp"
+                        app:layout_constraintTop_toTopOf="@+id/id_tv_record"
+                        app:layout_constraintBottom_toBottomOf="@+id/id_tv_record"
+                        />
+                    <TextView
+                        android:id="@+id/id_tv_record"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="服药记录"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="5dp"
+                        app:layout_constraintLeft_toRightOf="@+id/id_red_point"
+                        android:textColor="#ff333333"
+                        android:textSize="12sp"
+                        />
+
+                    <View
+                        android:id="@+id/id_check_data_point"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginRight="10dp"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        android:background="@drawable/shape_72b5ed_oval"
+                        app:layout_constraintRight_toLeftOf="@+id/id_tv_check_data"
+                        app:layout_constraintLeft_toRightOf="@+id/id_tv_record"
+                        app:layout_constraintTop_toTopOf="@+id/id_tv_record"
+                        app:layout_constraintBottom_toBottomOf="@+id/id_tv_record"
+                        />
+                    <TextView
+                        android:id="@+id/id_tv_check_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="选中日期"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintRight_toLeftOf="@+id/id_today_point"
+                        app:layout_constraintLeft_toRightOf="@+id/id_check_data_point"
+                        android:textColor="#ff333333"
+                        android:textSize="12sp"
+                        />
+
+                    <View
+                        android:id="@+id/id_today_point"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        app:layout_constraintRight_toLeftOf="@+id/id_tv_today"
+                        android:background="@drawable/shape_c3d3ec_oval"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="10dp"
+                        app:layout_constraintTop_toTopOf="@+id/id_tv_record"
+                        app:layout_constraintBottom_toBottomOf="@+id/id_tv_record"
+                        />
+                    <TextView
+                        android:id="@+id/id_tv_today"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="当前日期"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="5dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:textColor="#ff333333"
+                        android:textSize="12sp"
+                        android:layout_marginRight="30dp"
+                        />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/list_content"
+                        app:layout_constraintTop_toBottomOf="@+id/id_tv_record"
+                        android:layout_marginTop="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_width="match_parent"
+                        tools:listitem="@layout/item_medicine_record"
+                        android:layout_height="match_parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
+        </com.necer.calendar.Miui10Calendar>
+        <!--        app:todayCheckedSolarTextColor="@color/N_defaultSolarTextColor"-->
+        <!--        app:todayUnCheckedSolarTextColor="@color/N_defaultSolarTextColor"-->
     </LinearLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/ll_calendar"
-        android:background="@drawable/shape_f0f0f0_6"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        >
-      <View
-          android:id="@+id/id_red_point"
-          android:layout_width="5dp"
-          android:layout_height="5dp"
-          android:background="@drawable/shape_red_point"
-         app:layout_constraintLeft_toLeftOf="parent"
-          android:layout_marginLeft="30dp"
-          app:layout_constraintTop_toTopOf="@+id/id_tv_record"
-          app:layout_constraintBottom_toBottomOf="@+id/id_tv_record"
-          />
-        <TextView
-            android:id="@+id/id_tv_record"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="服药记录"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="5dp"
-            app:layout_constraintLeft_toRightOf="@+id/id_red_point"
-            android:textColor="#ff333333"
-            android:textSize="12sp"
-            />
-
-        <View
-            android:id="@+id/id_check_data_point"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginRight="10dp"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            android:background="@drawable/shape_c3d3ec_oval"
-            app:layout_constraintRight_toLeftOf="@+id/id_tv_check_data"
-            app:layout_constraintLeft_toRightOf="@+id/id_tv_record"
-            app:layout_constraintTop_toTopOf="@+id/id_tv_record"
-            app:layout_constraintBottom_toBottomOf="@+id/id_tv_record"
-            />
-        <TextView
-            android:id="@+id/id_tv_check_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="选中日期"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="20dp"
-            app:layout_constraintRight_toLeftOf="@+id/id_today_point"
-            app:layout_constraintLeft_toRightOf="@+id/id_check_data_point"
-            android:textColor="#ff333333"
-            android:textSize="12sp"
-            />
-
-        <View
-            android:id="@+id/id_today_point"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            app:layout_constraintRight_toLeftOf="@+id/id_tv_today"
-            android:background="@drawable/shape_dotted_line_oval"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="10dp"
-            app:layout_constraintTop_toTopOf="@+id/id_tv_record"
-            app:layout_constraintBottom_toBottomOf="@+id/id_tv_record"
-            />
-        <TextView
-            android:id="@+id/id_tv_today"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="当前日期"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="5dp"
-            app:layout_constraintRight_toRightOf="parent"
-            android:textColor="#ff333333"
-            android:textSize="12sp"
-            android:layout_marginRight="30dp"
-            />
-
-    <androidx.recyclerview.widget.RecyclerView
-        app:layout_constraintTop_toBottomOf="@+id/id_tv_record"
-        android:layout_marginTop="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="match_parent"
-        tools:listitem="@layout/item_medicine_record"
-        android:layout_height="0dp"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

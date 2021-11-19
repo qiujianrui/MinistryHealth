@@ -30,4 +30,30 @@ public class UrlConstants {
     //退出登录
     public static final String EXIT_LOGIN="/prod-api/system/patientInfo/exitLogin";
 
+    //首页
+    public static final String INDEX="/prod-api/system/index/getIndex";
+
+    //根据时间获取服药记录
+    public static final String GET_MEDICINE="/prod-api/system/index/getMedicine";
+
+    //获取全部服药记录时间信息
+    public static final String GET_MEDICINE_DATE="/prod-api/system/index/getMedicineDate";
+
+    //获取全部提醒时间信息
+    public static final String GET_REMIND_DATE="/prod-api/system/index/getRemindDate";
+
+    //根据时间获取提醒记录
+    public static final String GET_REMIND="/prod-api/system/index/getRemind";
+
+    //添加剂量
+    public static final String ADD_MEDICINE_RECORD="/prod-api/system/index/addMedicineRecord";
+
+    //添加提醒
+    public static final String ADD_REMIND_INFO="/prod-api/system/index/addRemindInfo";
+
+    //消息列表
+    public static final String GET_MSG_LIST="/prod-api/system/index/getMsgList";
+
+    //消息详情
+    public static final String GET_MSG_DETAILS="/prod-api/system/index/getMsgDetails";
 }

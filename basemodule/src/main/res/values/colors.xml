@@ -9,4 +9,6 @@
     <color name="colorDefault">#eeeeee</color>
 
     <color name="colorAppDefault">#5394C8</color>
+
+    <color name="colorGrey">#f0f0f0</color>
 </resources>

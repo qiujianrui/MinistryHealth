@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_weight="1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tv_englishWeekDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="S"
+        android:textColor="#ff333333"
+        android:textSize="10sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <View
+        android:id="@+id/v_point_bg"
+        android:visibility="visible"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/n_bg_point"
+        app:layout_constraintTop_toBottomOf="@+id/tv_englishWeekDate"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_chineseDate"
+     app:layout_constraintTop_toTopOf="@+id/v_point_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/v_point_bg"
+        app:layout_constraintLeft_toLeftOf="@+id/v_point_bg"
+        app:layout_constraintRight_toRightOf="@+id/v_point_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="09"
+        android:textColor="#ff333333"
+        android:textSize="12sp"
+        android:gravity="center"
+
+        />
+
+    <View
+        android:id="@+id/v_point"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/v_point_bg"
+        app:layout_constraintLeft_toLeftOf="@+id/v_point_bg"
+        app:layout_constraintRight_toRightOf="@+id/v_point_bg"
+        android:layout_marginBottom="3dp"
+        android:background="@drawable/n_point_checked_default"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

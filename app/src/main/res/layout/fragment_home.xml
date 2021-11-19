@@ -25,7 +25,7 @@
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/id_title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -34,17 +34,17 @@
         android:paddingTop="5dp"
         android:background="@drawable/shape_f0f0f0_6"
         >
-        <com.necer.view.WeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorContentBg"
-            />
-        <com.necer.calendar.WeekCalendar
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            app:showLunar="false"
-            app:calendarBackground="@color/colorContentBg"
-            />
+<!--        <com.necer.view.WeekBar-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/colorContentBg"-->
+<!--            />-->
+<!--        <com.necer.calendar.WeekCalendar-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            app:showLunar="false"-->
+<!--            app:calendarBackground="@color/colorContentBg"-->
+<!--            />-->
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -207,32 +207,94 @@
             app:layout_constraintBottom_toBottomOf="@+id/id_img_postbox"
             app:layout_constraintRight_toRightOf="@+id/id_img_more_msg"
             app:layout_constraintTop_toTopOf="@+id/id_img_postbox" />
-
-        <TextView
-            android:id="@+id/tv_msg_content"
-            android:layout_width="0dp"
+<!--         <LinearLayout-->
+<!--             android:layout_width="match_parent"-->
+<!--             android:layout_height="0dp"-->
+<!--             android:orientation="vertical"-->
+<!--             app:layout_constraintTop_toBottomOf="@+id/tv_msg_title"-->
+<!--             app:layout_constraintLeft_toLeftOf="parent"-->
+<!--             app:layout_constraintRight_toRightOf="parent"-->
+<!--             app:layout_constraintBottom_toBottomOf="@+id/img_bg_2"-->
+<!--             android:layout_marginLeft="20dp"-->
+<!--             android:layout_marginRight="20dp"-->
+<!--             >-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            android:lineSpacingExtra="5dp"
-            android:scrollbars="vertical"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="亲爱的张三：
-     您已经从深圳市精神卫生中心出院一周了，我们全体医护人员衷心地祝愿您工作与生活一切顺利。
-      住院期间，您担心出院后复发、康复失败，目前，您并没有因疾病来中心急诊就医，真诚地希望您出院后的康复过程顺利，也希望您能继续遵照医嘱服药并于下周前来复诊。
+            app:layout_constraintTop_toBottomOf="@+id/tv_msg_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/img_bg_2"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            >
+             <TextView
+                 android:id="@+id/tv_messageReceiver"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 app:layout_constraintLeft_toLeftOf="parent"
+                 app:layout_constraintTop_toTopOf="parent"
+                 android:layout_marginTop="10dp"
+                 android:lineSpacingExtra="5dp"
+                 android:scrollbars="vertical"
+                 android:paddingLeft="5dp"
+                 android:paddingRight="5dp"
+                 tools:text="亲爱的张三"
+                 android:textColor="#ff333333"
+                 android:textSize="11sp"
+                 />
+
+             <TextView
+                 android:id="@+id/tv_msg_content"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="5dp"
+                 android:lineSpacingExtra="5dp"
+                 android:scrollbars="vertical"
+                 android:paddingLeft="5dp"
+                 android:paddingRight="5dp"
+                 tools:text="目前，您并没有因疾病来中心急诊就医，真诚地希望您出院后的康复过程顺利，也希望您能继续遵照医嘱服药并于下周前来复诊。
       根据您的情况，我们建议您现阶段多做室外活动每天在室外慢走30分钟并观察是否起到减轻抑郁/焦虑情绪的效果。在晨光下慢走，效果往往会更好。试着培养这个习惯吧。
-      如果您需要帮助，您已经从深圳市精神卫生中心出院一周了，我们全体医护人员衷心地祝愿您工作与生活一切顺利。
-      住院期间，您担心出院后复发、康复失败，目前，您并没有因疾病来中心急诊就医，真诚地希望您出院后的康复过程顺利，也希望您能继续遵照医嘱服药并于下周前来复诊。
-      根据您的情况，我们建议您现阶段多做室外活动每天在室外慢走30分钟并观察是否起到减轻抑郁/焦虑情绪的效果。在晨光下慢走，效果往往会更好。试着培养这个习惯吧。
-      如果您需要帮助，请立即拨打心理危机机干预热线0755-25629459，或者联系住院期间照顾您的张医生（病区电话：0755-25898745）。您也可以搭乘地铁3号线至田贝站（D出口）前往深圳市精神卫生中心罗湖院区就诊。希望您一切安好。
-                                              \n深圳市精神卫生中心"
-            android:textColor="#ff333333"
-            android:textSize="11sp"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_bg_3"
-            app:layout_constraintLeft_toLeftOf="@+id/id_img_postbox"
-            app:layout_constraintRight_toRightOf="@+id/id_img_more_msg"
-            app:layout_constraintTop_toBottomOf="@id/tv_msg_title" />
+      如果您需要帮助，您已经从深圳市精神卫生中心出院一周了，"
+                 android:textColor="#ff333333"
+                 android:textSize="11sp"
+                 app:layout_constraintVertical_bias="0"
+                 app:layout_constraintLeft_toLeftOf="parent"
+                 app:layout_constraintRight_toRightOf="parent"
+                 android:layout_marginBottom="10dp"
+                 app:layout_constraintBottom_toTopOf="@+id/guideline1"
+                 app:layout_constraintTop_toBottomOf="@id/tv_messageReceiver"
+                 app:layout_constrainedHeight="true"
+                 />
+
+             <TextView
+                 android:id="@+id/tv_messageSender"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:lineSpacingExtra="5dp"
+                 android:scrollbars="vertical"
+                 android:paddingLeft="5dp"
+                 android:paddingRight="5dp"
+                 tools:text="深圳市精神卫生中心"
+                 android:textColor="#ff333333"
+                 android:textSize="11sp"
+                 android:layout_gravity="right"
+                 android:layout_marginTop="10dp"
+                 android:layout_marginBottom="20dp"
+                 app:layout_constraintRight_toRightOf="parent"
+                 app:layout_constraintTop_toBottomOf="@id/tv_msg_content" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="45dp"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+<!--         </LinearLayout>-->
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -306,10 +368,11 @@
             android:layout_marginTop="10dp"
             />
         <TextView
+            android:id="@+id/tv_phone"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="400-995-995-9"
+            tools:text="400-995-995-9"
             android:textColor="#ff3a3a3a"
             android:textSize="9sp"
             android:layout_marginLeft="15dp"

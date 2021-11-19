@@ -19,7 +19,7 @@
     <uses-permission android:name="android.permission.READ_APP_BADGE" /> <!-- HTC 角标 -->
     <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <application
         android:name=".MyApplication"
         android:allowBackup="true"

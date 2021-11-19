@@ -2,8 +2,15 @@ package com.yhjx.ministryhealth.api;
 
 
 import com.library.basemodule.entity.BaseEntity;
+import com.yhjx.ministryhealth.bean.IndexBean;
 import com.yhjx.ministryhealth.bean.LoginBean;
+import com.yhjx.ministryhealth.bean.MedicineListBean;
+import com.yhjx.ministryhealth.bean.MsgListBean;
 import com.yhjx.ministryhealth.bean.ProtocolPrivacyBean;
+import com.yhjx.ministryhealth.bean.RemindDateBean;
+import com.yhjx.ministryhealth.bean.RemindListBean;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
@@ -45,4 +52,36 @@ public interface ApiService {
     //退出登录
     @POST(UrlConstants.EXIT_LOGIN)
     Observable<BaseEntity> exitLogin();
+
+    //首页
+    @POST(UrlConstants.INDEX)
+    Observable<BaseEntity<IndexBean>> index();
+
+    //获取全部提醒时间信息
+    @POST(UrlConstants.GET_REMIND_DATE)
+    Observable<BaseEntity<RemindDateBean>> getRemindDate();
+
+    //根据时间获取提醒记录
+    @POST(UrlConstants.GET_REMIND)
+    Observable<BaseEntity<List<RemindListBean>>> getRemind(@Body RequestBody requestBody);
+
+    //获取全部提醒时间信息
+    @POST(UrlConstants.GET_MEDICINE_DATE)
+    Observable<BaseEntity<List<String>>> getMedicineDate();
+
+    //根据时间获取提醒记录
+    @POST(UrlConstants.GET_MEDICINE)
+    Observable<BaseEntity<List<MedicineListBean>>> getMedicine(@Body RequestBody requestBody);
+
+    //添加剂量
+    @POST(UrlConstants.ADD_MEDICINE_RECORD)
+    Observable<BaseEntity> addMedicineRecord(@Body RequestBody requestBody);
+
+    //添加提醒
+    @POST(UrlConstants.ADD_REMIND_INFO)
+    Observable<BaseEntity> addRemindInfo(@Body RequestBody requestBody);
+
+    //添加提醒
+    @POST(UrlConstants.GET_MSG_LIST)
+    Observable<BaseEntity<List<MsgListBean>>> getMsgList();
 }

@@ -114,8 +114,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         });
         SPUtils.getInstance().put(SpConstants.SP_KEY_PHONE,data.getPhone());
         SPUtils.getInstance().put(SpConstants.SP_KEY_USER_TOKEN,data.getToken());
+        SPUtils.getInstance().put(SpConstants.SP_KEY_PATIENT_ID,data.getPatientId());
         SPUtils.getInstance().put(SpConstants.SP_KEY_USER_DATA, JSON.toJSONString(data));
-        finish();
         startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 }
