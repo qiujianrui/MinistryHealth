@@ -3,11 +3,12 @@ package com.yhjx.ministryhealth.ui.adapter;
 import androidx.annotation.NonNull;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.yhjx.ministryhealth.R;
 import com.yhjx.ministryhealth.bean.MsgListBean;
 
-public class MessageAdapter extends BaseQuickAdapter<MsgListBean, BaseViewHolder> {
+public class MessageAdapter extends BaseQuickAdapter<MsgListBean, BaseViewHolder> implements LoadMoreModule {
     public MessageAdapter( ) {
         super(R.layout.item_notification_message);
     }

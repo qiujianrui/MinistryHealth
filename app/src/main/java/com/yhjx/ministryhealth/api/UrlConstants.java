@@ -56,4 +56,19 @@ public class UrlConstants {
 
     //消息详情
     public static final String GET_MSG_DETAILS="/prod-api/system/index/getMsgDetails";
+
+    //问卷详情
+    public static final String GET_PAPER_DETAILS="/prod-api/system/index/getPaperDetails";
+
+    //提交问卷
+    public static final String ADD_PAPER="/prod-api/system/index/addPaper";
+
+    //咨询历史记录
+    public static final String GET_HISTORY_MSG="/prod-api/system/index/getHistoryMsg";
+
+    //轮询消息
+    public static final String GET_END_MSG="/prod-api/system/index/getEndMsg";
+
+    //发送消息
+    public static final String ADD_MSG="/prod-api/system/index/addMsg";
 }

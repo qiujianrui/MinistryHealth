@@ -2,19 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_marginTop="10dp"
-    >
+    android:layout_marginTop="10dp">
     <TextView
         android:id="@+id/tv_topic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1. 您对我院得服务态度满意吗 ？"
         android:textColor="#ff333333"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:layout_marginBottom="15dp"
         />
     <EditText
+        android:id="@+id/edit_optional"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="120dp"
@@ -22,6 +23,9 @@
         android:layout_marginRight="5dp"
         android:textColor="#ff333333"
         android:textSize="14sp"
+        tools:text="123"
+        android:gravity="top"
+        android:padding="5dp"
         android:background="@drawable/shape_77c5ec_line"
         />
 </LinearLayout>

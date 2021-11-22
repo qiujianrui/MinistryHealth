@@ -12,6 +12,16 @@ public class BaseEntity<T> {
     public static final int SUCCESS = 200; //正常返回码
     private int code;
     private T data;
+    private T rows;
+
+    public T getRows() {
+        return rows;
+    }
+
+    public void setRows(T rows) {
+        this.rows = rows;
+    }
+
     private String msg;
 
     public T getData() {

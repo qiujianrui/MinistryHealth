@@ -1,15 +1,13 @@
 package com.yhjx.ministryhealth.bean;
 
-public class MsgListBean {
+public class MsgDetailBean {
 
     /**
      * messageTitle : 问卷通知
      * messageDate : 2021-11-09
-     * messageReceiver : 3
+     * messageReceiver : 11111
      * messageContent : 哈哈
      * messageSender : 深圳市精神卫生中心
-     * type : 1
-     * id : 1
      */
 
     private String messageTitle;
@@ -17,8 +15,6 @@ public class MsgListBean {
     private String messageReceiver;
     private String messageContent;
     private String messageSender;
-    private String type;
-    private String msgId;
 
     public String getMessageTitle() {
         return messageTitle;
@@ -58,21 +54,5 @@ public class MsgListBean {
 
     public void setMessageSender(String messageSender) {
         this.messageSender = messageSender;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getMsgId() {
-        return msgId;
-    }
-
-    public void setMsgId(String msgId) {
-        this.msgId = msgId;
     }
 }

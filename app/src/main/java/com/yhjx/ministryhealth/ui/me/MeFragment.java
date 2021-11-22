@@ -14,13 +14,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.alibaba.fastjson.JSON;
 import com.library.basemodule.dialog.CommonDialog;
 import com.library.basemodule.entity.BaseEntity;
 import com.library.basemodule.listener.OnConfirmClickListener;
 import com.library.basemodule.util.SPUtils;
 import com.library.basemodule.util.ToastUtils;
+import com.library.basemodule.util.glide.GlideUtils;
 import com.yhjx.ministryhealth.R;
 import com.yhjx.ministryhealth.base.BaseFragment;
+import com.yhjx.ministryhealth.bean.LoginBean;
+import com.yhjx.ministryhealth.constants.SpConstants;
 import com.yhjx.ministryhealth.manager.AppManager;
 import com.yhjx.ministryhealth.mvp.contract.LoginOutContract;
 import com.yhjx.ministryhealth.mvp.presenter.LoginOutPresenter;
@@ -39,7 +43,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Lo
     private TextView tvLogout;
 
     private LoginOutPresenter loginOutPresenter;
-
+    private LoginBean loginBean;
     public MeFragment() {
         // Required empty public constructor
     }
@@ -47,7 +51,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Lo
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        loginBean= JSON.parseObject(SPUtils.getInstance().getString(SpConstants.SP_KEY_USER_DATA),LoginBean.class);
     }
 
     @Override
@@ -74,10 +78,14 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Lo
         llUpdate = view.findViewById(R.id.ll_update);
         tvLogout = view.findViewById(R.id.tv_logout);
         tvLogout.setOnClickListener(this);
+
     }
 
     private void initData() {
         loginOutPresenter=new LoginOutPresenter(this,getActivity());
+        tvName.setText(loginBean.getName());
+        tvPhone.setText(loginBean.getPhone());
+        GlideUtils.intoCircle(imgHead,loginBean.getPersonImg());
     }
 
     @Override

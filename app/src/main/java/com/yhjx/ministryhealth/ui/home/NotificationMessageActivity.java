@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.chad.library.adapter.base.listener.OnLoadMoreListener;
 import com.yhjx.ministryhealth.R;
 import com.yhjx.ministryhealth.base.BaseActivity;
+import com.yhjx.ministryhealth.bean.MsgDetailBean;
 import com.yhjx.ministryhealth.bean.MsgListBean;
 import com.yhjx.ministryhealth.mvp.contract.MessageContract;
 import com.yhjx.ministryhealth.mvp.presenter.MessagePresenter;
@@ -26,6 +28,7 @@ public class NotificationMessageActivity extends BaseActivity implements View.On
     private RecyclerView listContent;
     private MessageAdapter messageAdapter;
     private MessagePresenter messagePresenter;
+    private int pageNum=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +53,7 @@ public class NotificationMessageActivity extends BaseActivity implements View.On
     @Override
     protected void initData() {
         messagePresenter=new MessagePresenter(this,this);
-        messagePresenter.getMessageList();
+        netData();
     }
 
     @Override
@@ -60,13 +63,25 @@ public class NotificationMessageActivity extends BaseActivity implements View.On
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 switch (messageAdapter.getData().get(position).getType()){
                     case "0":
-                        startActivity(new Intent(mActivity, MessageDetailActivity.class));
+                        startActivity(new Intent(mActivity, MessageDetailActivity.class).putExtra("id",messageAdapter.getData().get(position).getMsgId()));
                         break;
                     case "1":
+                        startActivity(new Intent(mActivity, QuestionnaireActivity.class).putExtra("id",messageAdapter.getData().get(position).getMsgId()));
                         break;
                 }
             }
         });
+        messageAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                pageNum++;
+                netData();
+            }
+        });
+    }
+
+    private void netData() {
+        messagePresenter.getMessageList(pageNum);
     }
 
     @Override
@@ -80,6 +95,30 @@ public class NotificationMessageActivity extends BaseActivity implements View.On
 
     @Override
     public void getMessageListSuccess(List<MsgListBean> data) {
-        messageAdapter.setList(data);
+        if (pageNum==1) {
+            messageAdapter.setList(data);
+        }else {
+            if (data.size()==0){
+                messageAdapter.getLoadMoreModule().loadMoreEnd();
+            }else {
+                messageAdapter.addData(data);
+                messageAdapter.getLoadMoreModule().loadMoreComplete();
+            }
+        }
+    }
+
+    @Override
+    public void getMessageDetailSuccess(MsgDetailBean data) {
+
+    }
+
+    @Override
+    public void loadFailure(int errCode, String msg, String action) {
+        if (pageNum==1) {
+
+        }else {
+            pageNum--;
+            messageAdapter.getLoadMoreModule().loadMoreFail();
+        }
     }
 }

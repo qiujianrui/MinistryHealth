@@ -35,6 +35,7 @@ public class PushMessageIntentService extends AliyunMessageIntentService {
         Log.i(TAG,"收到一条推送通知 ： " + title + ", summary:" + summary+"通知id："+extraMap.get("_ALIYUN_NOTIFICATION_ID_")+"-extraMap==" +extraMap);
         if(!extraMap.get("count").isEmpty()) {
             BadgeUtils.setCount(Integer.parseInt(extraMap.get("count")), context);
+            Log.d(TAG, "onNotification: "+extraMap.get("pushType"));
         }
     }
 

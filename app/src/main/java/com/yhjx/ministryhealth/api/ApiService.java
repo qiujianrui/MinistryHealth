@@ -2,11 +2,14 @@ package com.yhjx.ministryhealth.api;
 
 
 import com.library.basemodule.entity.BaseEntity;
+import com.yhjx.ministryhealth.bean.ChatMsgBean;
 import com.yhjx.ministryhealth.bean.IndexBean;
 import com.yhjx.ministryhealth.bean.LoginBean;
 import com.yhjx.ministryhealth.bean.MedicineListBean;
+import com.yhjx.ministryhealth.bean.MsgDetailBean;
 import com.yhjx.ministryhealth.bean.MsgListBean;
 import com.yhjx.ministryhealth.bean.ProtocolPrivacyBean;
+import com.yhjx.ministryhealth.bean.QuestionnaireBean;
 import com.yhjx.ministryhealth.bean.RemindDateBean;
 import com.yhjx.ministryhealth.bean.RemindListBean;
 
@@ -81,7 +84,32 @@ public interface ApiService {
     @POST(UrlConstants.ADD_REMIND_INFO)
     Observable<BaseEntity> addRemindInfo(@Body RequestBody requestBody);
 
-    //添加提醒
+    //消息列表
     @POST(UrlConstants.GET_MSG_LIST)
-    Observable<BaseEntity<List<MsgListBean>>> getMsgList();
+    Observable<BaseEntity<List<MsgListBean>>> getMsgList(@Body RequestBody requestBody);
+
+    //消息详情
+    @POST(UrlConstants.GET_MSG_DETAILS)
+    Observable<BaseEntity<MsgDetailBean>> getMsgDetails(@Body RequestBody requestBody);
+
+    //问卷详情
+    @POST(UrlConstants.GET_PAPER_DETAILS)
+    Observable<BaseEntity<QuestionnaireBean>> getPaperDetails(@Body RequestBody requestBody);
+
+    //提交问卷
+    @POST(UrlConstants.ADD_PAPER)
+    Observable<BaseEntity> addPaper(@Body RequestBody requestBody);
+
+    //咨询历史记录
+    @POST(UrlConstants.GET_HISTORY_MSG)
+    Observable<BaseEntity<List<ChatMsgBean>>> getHistoryMsg(@Body RequestBody requestBody);
+
+    //轮询消息
+    @POST(UrlConstants.GET_END_MSG)
+    Observable<BaseEntity<List<ChatMsgBean>>> getEndMsg(@Body RequestBody requestBody);
+
+    //提交问卷
+    @POST(UrlConstants.ADD_MSG)
+    Observable<BaseEntity> addMsg(@Body RequestBody requestBody);
+
 }

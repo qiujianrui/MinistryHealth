@@ -120,8 +120,8 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:orientation="horizontal"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/id_img_remind"
-            app:layout_constraintRight_toLeftOf="@+id/id_img_more_msg"
             app:layout_constraintTop_toTopOf="@+id/id_img_remind">
 
             <TextView
@@ -162,17 +162,17 @@
                 app:layout_constraintBottom_toBottomOf="@+id/id_img_remind"
                 app:layout_constraintLeft_toRightOf="@+id/id_img_remind"
                 app:layout_constraintTop_toTopOf="@+id/id_img_remind" />
+
+            <ImageView
+                android:id="@+id/id_img_more_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:src="@mipmap/ic_more_msg"
+               />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/id_img_more_msg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
-            android:src="@mipmap/ic_more_msg"
-            app:layout_constraintRight_toRightOf="parent"
-           app:layout_constraintTop_toTopOf="@+id/id_img_remind"
-            app:layout_constraintBottom_toBottomOf="@+id/id_img_remind"/>
+
 
         <ImageView
             android:id="@+id/id_img_postbox"
