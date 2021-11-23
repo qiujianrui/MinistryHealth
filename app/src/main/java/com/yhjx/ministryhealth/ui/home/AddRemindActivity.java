@@ -21,6 +21,8 @@ import com.yhjx.ministryhealth.mvp.contract.AddRemindContract;
 import com.yhjx.ministryhealth.mvp.presenter.AddRemindPresenter;
 import com.yhjx.ministryhealth.util.DataUtil;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -55,6 +57,7 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
     protected void initView() {
 
         imgBack = findViewById(R.id.img_back);
+        imgBack.setOnClickListener(this);
         tvTitle = findViewById(R.id.tv_title);
         tvType = findViewById(R.id.tv_type);
         tvType.setOnClickListener(this);
@@ -108,10 +111,10 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
                 TimePickerView pvTime = new TimePickerBuilder(this, new OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {//选中事件回调
-                        tvTime.setText(DataUtil.getDate(date));
+                        tvTime.setText(DataUtil.getDateHM (date));
                     }
                 })
-                        .setType(new boolean[]{true, true, true, false, false, false})
+                        .setType(new boolean[]{true, true, true, true, true, false})
                         .build();
                 pvTime.setTitleText("选取日期");
                 pvTime.show();
@@ -159,6 +162,6 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void addRemindSuccess(BaseEntity data) {
             ToastUtils.showShort("添加成功");
-        finish();
+            finish();
     }
 }

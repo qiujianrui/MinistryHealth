@@ -106,7 +106,7 @@ public interface ApiService {
 
     //轮询消息
     @POST(UrlConstants.GET_END_MSG)
-    Observable<BaseEntity<List<ChatMsgBean>>> getEndMsg(@Body RequestBody requestBody);
+    Observable<BaseEntity<List<ChatMsgBean>>> getEndMsg();
 
     //提交问卷
     @POST(UrlConstants.ADD_MSG)

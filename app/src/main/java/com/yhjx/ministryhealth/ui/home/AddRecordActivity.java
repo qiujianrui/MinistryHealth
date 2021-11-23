@@ -15,6 +15,8 @@ import com.yhjx.ministryhealth.base.BaseActivity;
 import com.yhjx.ministryhealth.mvp.contract.AddMedicineContract;
 import com.yhjx.ministryhealth.mvp.presenter.AddMedicinePresenter;
 
+import org.greenrobot.eventbus.EventBus;
+
 /**
  * @author
  * @time 2021/9/18
@@ -98,5 +100,6 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
     public void addMedicineSuccess(BaseEntity data) {
         ToastUtils.showShort("添加成功");
         finish();
+
     }
 }

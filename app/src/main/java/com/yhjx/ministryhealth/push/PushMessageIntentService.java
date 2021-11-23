@@ -1,10 +1,14 @@
 package com.yhjx.ministryhealth.push;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.sdk.android.push.AliyunMessageIntentService;
 import com.alibaba.sdk.android.push.notification.CPushMessage;
+import com.yhjx.ministryhealth.ui.consult.ConsultMainActivity;
+import com.yhjx.ministryhealth.ui.home.NotificationMessageActivity;
 import com.yhjx.ministryhealth.util.BadgeUtils;
 
 
@@ -33,10 +37,14 @@ public class PushMessageIntentService extends AliyunMessageIntentService {
     @Override
     protected void onNotification(Context context, String title, String summary, Map<String, String> extraMap) {
         Log.i(TAG,"收到一条推送通知 ： " + title + ", summary:" + summary+"通知id："+extraMap.get("_ALIYUN_NOTIFICATION_ID_")+"-extraMap==" +extraMap);
-        if(!extraMap.get("count").isEmpty()) {
-            BadgeUtils.setCount(Integer.parseInt(extraMap.get("count")), context);
-            Log.d(TAG, "onNotification: "+extraMap.get("pushType"));
+      //  Log.d(TAG, "onNotification: "+extraMap.get("pushType"));
+        if(!extraMap.get("pushType").isEmpty()) {
+
         }
+//        if(!extraMap.get("count").isEmpty()) {
+//            BadgeUtils.setCount(Integer.parseInt(extraMap.get("count")), context);
+//
+//        }
     }
 
     /**
@@ -60,23 +68,15 @@ public class PushMessageIntentService extends AliyunMessageIntentService {
     @Override
     protected void onNotificationOpened(Context context, String title, String summary, String extraMap) {
         Log.i(TAG,"onNotificationOpened ： " + " : " + title + " : " + summary + " : " + extraMap);
-//        JSONObject jsonObject=JSONObject.parseObject(extraMap);
-//        switch (jsonObject.getString("type")){
-//            case "1":
-//                Gson gson=new Gson();
-//                RecodeListBean userBean = gson.fromJson(jsonObject.getString("data"),RecodeListBean.class);//jsonTest是json字符串
-//                context.startActivity(new Intent(context, ChatActivity.class).putExtra("User",userBean));
-//                break;
-//            default:
-                //        try {
-//            Class activityClass=Class.forName("com.mirrorego.ymcounselor.ui.me.activity.SettingActivity");
-//            context.startActivity(new Intent(context, activityClass));
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//                break;
-//        }
-
+        JSONObject jsonObject= JSONObject.parseObject(extraMap);
+        switch (jsonObject.getString("pushType")){
+            case "1":
+                startActivity(new Intent(context, NotificationMessageActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                break;
+            case "2":
+                startActivity(new Intent(context, ConsultMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                break;
+        }
     }
 
     /**

@@ -24,6 +24,8 @@ import com.yhjx.ministryhealth.painter.CustomPainter;
 import com.yhjx.ministryhealth.ui.adapter.MedicineListAdapter;
 import com.yhjx.ministryhealth.ui.adapter.RemindListAdapter;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.joda.time.LocalDate;
 
 import java.util.List;
@@ -114,7 +116,7 @@ public class MedicineRecordActivity extends BaseActivity implements View.OnClick
                 calendar.toNextPager();
                 break;
             case R.id.img_add_record:
-                startActivity(new Intent(this,AddRemindActivity.class ));
+                startActivity(new Intent(this,AddRecordActivity.class ));
                 break;
 
         }
@@ -132,4 +134,6 @@ public class MedicineRecordActivity extends BaseActivity implements View.OnClick
     public void getMedicine(List<MedicineListBean> data) {
         medicineListAdapter.setList(data);
     }
+
+
 }

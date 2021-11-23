@@ -34,7 +34,7 @@ public class HeaderInterceptor implements Interceptor {
        if (!StringUtils.isEmpty(Phone)) {
            build.header("phone", Phone);
        }
-       if (!StringUtils.isEmpty(Phone)) {
+       if (!StringUtils.isEmpty(patientId)) {
            build.header("patientId", patientId);
        }
        build.addHeader("version", BuildConfig.VERSION_NAME);

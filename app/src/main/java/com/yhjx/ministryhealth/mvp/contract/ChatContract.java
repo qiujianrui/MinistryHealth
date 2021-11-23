@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ChatContract {
         interface Presenter {
-                void getHistoryMsg(String pageNum,String patientId);
+                void getHistoryMsg(int pageNum,String patientId);
                 void getEndMsg();
                 void sendMsg(String sendData);
             }
@@ -15,6 +15,6 @@ public interface ChatContract {
             interface View extends IView {
                 void getHistoryMsgSuccess(List<ChatMsgBean> data);
                 void getEndMsgSuccess(List<ChatMsgBean> data);
-                void sendMsgSuccess();
+                void sendMsgSuccess(ChatMsgBean data);
             }
 }
