@@ -30,8 +30,7 @@ public class ChatPresenter extends BasePresenter<ChatContract.View> implements C
     HashMap<String, Object> hashMap = new HashMap<>();
     hashMap.put("pageNum", pageNum);
     hashMap.put("pageSize", PAGE_SIZE);
-    //hashMap.put("patientId", SPUtils.getInstance().getString(SpConstants.SP_KEY_PATIENT_ID));
-        hashMap.put("patientId", "1");
+    hashMap.put("patientId", SPUtils.getInstance().getString(SpConstants.SP_KEY_PATIENT_ID));
     RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), JSON.toJSONString(hashMap));
     AppHttpUtils.getApiService().getHistoryMsg(requestBody)
             .compose(RxHelper.ioMain())

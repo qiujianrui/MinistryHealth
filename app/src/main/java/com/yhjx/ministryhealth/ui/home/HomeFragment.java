@@ -7,6 +7,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private TextView tvMsgTime;
     private TextView tvPhone;
     private IndexBean homeData;
+    private FrameLayout flEmptyMsg;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -69,6 +71,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         tvMsgTitle = view.findViewById(R.id.tv_msg_title);
         tvMsgTime = view.findViewById(R.id.tv_msg_time);
         tvPhone = view.findViewById(R.id.tv_phone);
+        flEmptyMsg = view.findViewById(R.id.fl_empty_msg);
     }
 
     @Override
@@ -84,7 +87,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 startActivity(new Intent(getContext(), MedicineRecordActivity.class));
                 break;
             case R.id.ll_telephone:
-                if (homeData.getHotTel()!=null) {
+                if (homeData.getHotTel() != null) {
                     Intent intent = new Intent(Intent.ACTION_DIAL);
                     Uri data = Uri.parse("tel:" + homeData.getHotTel());
                     intent.setData(data);
@@ -96,7 +99,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void indexSuccess(IndexBean data) {
-        homeData=data;
+        homeData = data;
         llCalendar.removeAllViews();
         for (int i = 0; i < data.getIndexDateListVos().size(); i++) {
             WeekDataLayout weekDataLayout = new WeekDataLayout(getActivity());
@@ -110,17 +113,20 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             llCalendar.addView(weekDataLayout);
         }
         if (data.getIndexMsgVo() != null) {
-            tvMessageReceiver.setText(data.getIndexMsgVo().getMessageReceiver());
-            tvMessageSender.setText(data.getIndexMsgVo().getMessageSender());
-            tvMsgContent.setText(data.getIndexMsgVo().getMessageContent());
-            if (data.getIndexMsgVo().getMessageCount().equals("0")) {
-                llMsgHint.setVisibility(View.GONE);
-            } else {
-                llMsgHint.setVisibility(View.VISIBLE);
-                tvNewMsgNum.setText(data.getIndexMsgVo().getMessageCount());
-                tvMsgTitle.setText(data.getIndexMsgVo().getMessageTitle());
-                tvMsgTime.setText(data.getIndexMsgVo().getMessageDate());
+            if (data.getIndexMsgVo().getMessageContent().isEmpty()){
+                flEmptyMsg.setVisibility(View.VISIBLE);
+            }else {
+                flEmptyMsg.setVisibility(View.VISIBLE);
+                tvMessageReceiver.setText(data.getIndexMsgVo().getMessageReceiver());
+                tvMessageSender.setText(data.getIndexMsgVo().getMessageSender());
+                tvMsgContent.setText(data.getIndexMsgVo().getMessageContent());
             }
+
+            llMsgHint.setVisibility(View.VISIBLE);
+            tvNewMsgNum.setText(data.getIndexMsgVo().getMessageCount());
+            tvMsgTitle.setText(data.getIndexMsgVo().getMessageTitle());
+            tvMsgTime.setText(data.getIndexMsgVo().getMessageDate());
+
         }
         tvPhone.setText(data.getHotTel());
     }
