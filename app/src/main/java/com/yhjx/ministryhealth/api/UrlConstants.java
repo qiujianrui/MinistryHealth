@@ -71,4 +71,7 @@ public class UrlConstants {
 
     //发送消息
     public static final String ADD_MSG="/prod-api/system/index/addMsg";
+
+    //版本升级
+    static final String UPDATE_APP="/mirrorego/version/updateApp";
 }

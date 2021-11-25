@@ -23,4 +23,14 @@ public class DataUtil {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:00");
         return format.format(date);
     }
+
+    public static long date2TimeStamp(String date, String format) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            return sdf.parse(date).getTime() ;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

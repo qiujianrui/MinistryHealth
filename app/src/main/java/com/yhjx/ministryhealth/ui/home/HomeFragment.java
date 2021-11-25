@@ -116,7 +116,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             if (data.getIndexMsgVo().getMessageContent().isEmpty()){
                 flEmptyMsg.setVisibility(View.VISIBLE);
             }else {
-                flEmptyMsg.setVisibility(View.VISIBLE);
+                flEmptyMsg.setVisibility(View.GONE);
                 tvMessageReceiver.setText(data.getIndexMsgVo().getMessageReceiver());
                 tvMessageSender.setText(data.getIndexMsgVo().getMessageSender());
                 tvMsgContent.setText(data.getIndexMsgVo().getMessageContent());

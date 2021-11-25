@@ -12,16 +12,27 @@
     android:layout_marginRight="16dp"
     android:layout_marginBottom="10dp"
     >
+    <LinearLayout
+        android:id="@+id/ll_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:minWidth="50dp"
+        android:gravity="right"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
     <TextView
         android:id="@+id/tv_dose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="50g"
+        android:text="550"
         android:textColor="#ff333333"
         android:textSize="12sp"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="@+id/tv_time"
-        android:layout_marginLeft="30dp"
+        android:gravity="right"
         />
 
     <TextView
@@ -33,8 +44,11 @@
         android:textSize="12sp"
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/tv_dose"
         app:layout_constraintTop_toBottomOf="@+id/tv_dose"
         />
+    </LinearLayout>
+
 
     <View
         android:id="@+id/id_v"
@@ -43,10 +57,9 @@
         android:background="#C3D3EC"
        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/tv_time"
-        app:layout_constraintRight_toLeftOf="@+id/tv_type"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
+       app:layout_constraintLeft_toRightOf="@+id/ll_left"
+       android:layout_marginLeft="11dp"
+
         />
 
     <TextView
@@ -56,10 +69,9 @@
         android:text="保健品"
         android:textColor="#ff333333"
         android:textSize="12sp"
-        app:layout_constraintTop_toTopOf="@+id/tv_dose"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_dose"
+        app:layout_constraintTop_toTopOf="@+id/ll_left"
         app:layout_constraintLeft_toRightOf="@+id/id_v"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="11dp"
         />
 
     <TextView
@@ -69,8 +81,10 @@
         android:text="益气糖浆胶囊"
         android:textColor="#ff333333"
         android:textSize="12sp"
-        app:layout_constraintTop_toTopOf="@+id/tv_time"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_time"
+        app:layout_constraintBottom_toBottomOf="@+id/ll_left"
        app:layout_constraintLeft_toLeftOf="@+id/tv_type"
         />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

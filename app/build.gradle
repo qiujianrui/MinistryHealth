@@ -67,6 +67,8 @@ dependencies {
     implementation project(path: ':basemodule')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation project(path: ':ncalendar')
+    implementation project(path: ':calendarprovider')
+    implementation project(path: ':appupdateX')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     implementation 'com.contrarywind:Android-PickerView:4.1.9'

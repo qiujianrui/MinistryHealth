@@ -12,6 +12,7 @@ import com.yhjx.ministryhealth.bean.ProtocolPrivacyBean;
 import com.yhjx.ministryhealth.bean.QuestionnaireBean;
 import com.yhjx.ministryhealth.bean.RemindDateBean;
 import com.yhjx.ministryhealth.bean.RemindListBean;
+import com.yhjx.ministryhealth.bean.UpdateAppBean;
 
 import java.util.List;
 
@@ -112,4 +113,7 @@ public interface ApiService {
     @POST(UrlConstants.ADD_MSG)
     Observable<BaseEntity> addMsg(@Body RequestBody requestBody);
 
+    //版本升级
+    @POST(UrlConstants.UPDATE_APP)
+    Observable<BaseEntity<UpdateAppBean>> UpdateApp( );
 }

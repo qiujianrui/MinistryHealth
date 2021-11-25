@@ -1,10 +1,16 @@
 package com.yhjx.ministryhealth.ui.home;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
@@ -13,6 +19,8 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.google.gson.Gson;
+import com.kyle.calendarprovider.calendar.CalendarEvent;
+import com.kyle.calendarprovider.calendar.CalendarProviderManager;
 import com.library.basemodule.entity.BaseEntity;
 import com.library.basemodule.util.ToastUtils;
 import com.yhjx.ministryhealth.R;
@@ -46,6 +54,12 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_CALENDAR,
+                            Manifest.permission.READ_CALENDAR}, 1);
+        }
     }
 
     @Override
@@ -154,6 +168,7 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
                     ToastUtils.showShort("请选择是否重复");
                     return;
                 }
+
                 addRemindPresenter.addRemind(selectType,remindData,tvTime.getText().toString());
                 break;
         }
@@ -162,6 +177,25 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void addRemindSuccess(BaseEntity data) {
             ToastUtils.showShort("添加成功");
+        long timeRemind= DataUtil.date2TimeStamp(tvTime.getText().toString(),"yyyy-MM-dd HH:mm:00");
+        CalendarEvent calendarEvent = new CalendarEvent(
+                tvType.getText().toString(),
+                "",
+                "",
+                timeRemind,
+                timeRemind + 1800000,
+                0, null
+        );
+
+        // 添加事件
+        int result = CalendarProviderManager.addCalendarEvent(this, calendarEvent);
+//        if (result == 0) {
+//            Toast.makeText(this, "插入成功", Toast.LENGTH_SHORT).show();
+//        } else if (result == -1) {
+//            Toast.makeText(this, "插入失败", Toast.LENGTH_SHORT).show();
+//        } else if (result == -2) {
+//            Toast.makeText(this, "没有权限", Toast.LENGTH_SHORT).show();
+//        }
             finish();
     }
 }
