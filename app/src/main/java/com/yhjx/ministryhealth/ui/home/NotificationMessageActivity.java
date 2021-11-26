@@ -46,9 +46,9 @@ public class NotificationMessageActivity extends BaseActivity implements View.On
         imgBack.setOnClickListener(this);
         listContent = findViewById(R.id.list_content);
         messageAdapter=new MessageAdapter();
-        messageAdapter.setEmptyView(R.layout.layout_empty_view);
         listContent.setLayoutManager(new LinearLayoutManager(this));
         listContent.setAdapter(messageAdapter);
+        messageAdapter.setEmptyView(R.layout.layout_empty_view);
     }
 
     @Override

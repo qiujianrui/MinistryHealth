@@ -99,10 +99,11 @@ public class  ConsultMainActivity extends BaseActivity implements ChatContract.V
         arrow.setScaleY(-1);//必须设置
         refreshLayout = findViewById(R.id.refresh_layout);
         refreshLayout.setEnableRefresh(false);//必须关闭
-        refreshLayout.setEnableAutoLoadMore(true);//必须关闭
+        refreshLayout.setEnableAutoLoadMore(false);//必须关闭
         refreshLayout.setEnableNestedScroll(false);//必须关闭
         refreshLayout.setEnableScrollContentWhenLoaded(true);//必须关闭
         refreshLayout.getLayout().setScaleY(-1);//必须设置
+        refreshLayout.autoLoadMore();
         refreshLayout.setScrollBoundaryDecider(new ScrollBoundaryDeciderAdapter() {
             @Override
             public boolean canLoadMore(View content) {

@@ -21,7 +21,7 @@
         android:textSize="12sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-
+        app:layout_constraintBottom_toBottomOf="parent"
         />
 
     <TextView
@@ -32,6 +32,7 @@
         android:textColor="#ff333333"
         android:textSize="12sp"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_time_end_start"
         />
@@ -43,7 +44,7 @@
         android:background="#C3D3EC"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/tv_time_end"
+        app:layout_constraintLeft_toRightOf="@+id/tv_time_end_start"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="10dp"
         />

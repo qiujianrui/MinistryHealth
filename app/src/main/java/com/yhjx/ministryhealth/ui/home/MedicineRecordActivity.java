@@ -116,7 +116,7 @@ public class MedicineRecordActivity extends BaseActivity implements View.OnClick
                 calendar.toNextPager();
                 break;
             case R.id.img_add_record:
-                startActivity(new Intent(this,AddRecordActivity.class ));
+                startActivity(new Intent(this,AddRecordActivity.class ).putExtra("dateCreate",selectLocalDate.toString("yyyy-MM-dd")));
                 break;
 
         }

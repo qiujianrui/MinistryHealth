@@ -23,12 +23,13 @@ public class AddMedicinePresenter extends BasePresenter<AddMedicineContract.View
     }
 
     @Override
-    public void addMedicine(String medicineClass, String medicineName, String medicineNum, String medicineHz) {
+    public void addMedicine(String medicineClass, String medicineName, String medicineNum, String medicineHz,String dateCreate) {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("medicineClass",medicineClass );
         hashMap.put("medicineName",medicineName );
         hashMap.put("medicineNum",medicineNum );
         hashMap.put("medicineHz",medicineHz );
+        hashMap.put("dateCreate",dateCreate);
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), JSON.toJSONString(hashMap));
         AppHttpUtils.getApiService().addMedicineRecord(requestBody)
                 .compose(RxHelper.ioMain())

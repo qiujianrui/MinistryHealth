@@ -30,7 +30,7 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
     private EditText editMedicineNum;
     private EditText editMedicineHz;
     private Button tvSave;
-
+    private String dateCreate;
     private AddMedicinePresenter addMedicinePresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     protected void initData() {
+        dateCreate= getIntent().getStringExtra("dateCreate");
         addMedicinePresenter=new AddMedicinePresenter(this,this);
     }
 
@@ -91,7 +92,7 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
                 addMedicinePresenter.addMedicine(editMedicineClass.getText().toString()
                 ,editMedicineName.getText().toString(),
                         editMedicineNum.getText().toString(),
-                        editMedicineHz.getText().toString());
+                        editMedicineHz.getText().toString(),dateCreate);
                 break;
         }
     }

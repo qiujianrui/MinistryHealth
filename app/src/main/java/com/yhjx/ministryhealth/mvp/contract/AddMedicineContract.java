@@ -5,7 +5,7 @@ import com.library.basemodule.mvp.IView;
 
 public interface AddMedicineContract {
         interface Presenter {
-                void addMedicine(String medicineClass, String medicineName, String medicineNum,String medicineHz);
+                void addMedicine(String medicineClass, String medicineName, String medicineNum,String medicineHz,String dateCreate);
             }
 
             interface View extends IView {

@@ -15,7 +15,6 @@ public class RemindListAdapter extends BaseQuickAdapter<RemindListBean, BaseView
     @Override
     protected void convert(@NonNull BaseViewHolder baseViewHolder, RemindListBean data) {
         baseViewHolder.setText(R.id.tv_time_end_start,data.getDateStart());
-        baseViewHolder.setText(R.id.tv_time_end,data.getDateEnd());
         baseViewHolder.setText(R.id.tv_name,data.getRemindData());
     }
 }
