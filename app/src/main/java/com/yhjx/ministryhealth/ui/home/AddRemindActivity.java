@@ -177,6 +177,7 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void addRemindSuccess(BaseEntity data) {
             ToastUtils.showShort("添加成功");
+            //添加提醒到日历
         long timeRemind= DataUtil.date2TimeStamp(tvTime.getText().toString(),"yyyy-MM-dd HH:mm:00");
         CalendarEvent calendarEvent = new CalendarEvent(
                 tvType.getText().toString(),
