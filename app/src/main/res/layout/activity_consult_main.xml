@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_emoji_btn"
             android:layout_gravity="center_vertical"
-
+            android:visibility="gone"
             />
         <ImageView
             android:id="@+id/img_btn_send"

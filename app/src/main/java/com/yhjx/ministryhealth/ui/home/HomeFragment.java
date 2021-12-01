@@ -36,7 +36,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private TextView tvPhone;
     private IndexBean homeData;
     private FrameLayout flEmptyMsg;
-
+    private IndexPresenter indexPresenter;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home, container, false);
@@ -50,8 +50,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     private void initData() {
-        IndexPresenter indexPresenter = new IndexPresenter(this, getActivity());
-        indexPresenter.index();
+         indexPresenter = new IndexPresenter(this, getActivity());
     }
 
     private void initView(View view) {
@@ -94,6 +93,26 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                     startActivity(intent);
                 }
                 break;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (indexPresenter==null){
+            indexPresenter = new IndexPresenter(this, getActivity());
+        }
+        indexPresenter.index();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            if (indexPresenter==null){
+                indexPresenter = new IndexPresenter(this, getActivity());
+            }
+            indexPresenter.index();
         }
     }
 

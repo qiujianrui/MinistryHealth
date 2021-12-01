@@ -53,13 +53,16 @@ public class ChatPresenter extends BasePresenter<ChatContract.View> implements C
 
     @Override
     public void getEndMsg() {
-        AppHttpUtils.getApiService().getEndMsg()
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("patientId", SPUtils.getInstance().getString(SpConstants.SP_KEY_PATIENT_ID));
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), JSON.toJSONString(hashMap));
+        AppHttpUtils.getApiService().getEndMsg(requestBody)
                 .compose(RxHelper.ioMain())
                 .subscribe(new BaseObserver<BaseEntity<List<ChatMsgBean>>>(activityRef.get(),false,false) {
 
                     @Override
                     public void onSuccess(BaseEntity<List<ChatMsgBean>> result) {
-                        getView().getEndMsgSuccess(result.getRows());
+                        getView().getEndMsgSuccess(result.getData());
                     }
 
                     @Override
