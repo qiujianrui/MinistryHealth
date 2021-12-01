@@ -24,7 +24,7 @@ public class PaperPresenter extends BasePresenter<PaperContract.View> implements
     @Override
     public void getPaperDetail(String id) {
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("msgId", "1");
+        hashMap.put("msgId", id);
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), JSON.toJSONString(hashMap));
         AppHttpUtils.getApiService().getPaperDetails(requestBody)
                 .compose(RxHelper.ioMain())
