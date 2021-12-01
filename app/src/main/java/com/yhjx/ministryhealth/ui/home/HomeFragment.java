@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.yhjx.ministryhealth.R;
 import com.yhjx.ministryhealth.base.BaseFragment;
@@ -37,6 +38,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private IndexBean homeData;
     private FrameLayout flEmptyMsg;
     private IndexPresenter indexPresenter;
+    private ConstraintLayout clMessageMain;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home, container, false);
@@ -50,7 +53,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     private void initData() {
-         indexPresenter = new IndexPresenter(this, getActivity());
+        indexPresenter = new IndexPresenter(this, getActivity());
     }
 
     private void initView(View view) {
@@ -71,6 +74,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         tvMsgTime = view.findViewById(R.id.tv_msg_time);
         tvPhone = view.findViewById(R.id.tv_phone);
         flEmptyMsg = view.findViewById(R.id.fl_empty_msg);
+        clMessageMain = view.findViewById(R.id.cl_message_main);
+        clMessageMain.setOnClickListener(this);
     }
 
     @Override
@@ -93,13 +98,23 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                     startActivity(intent);
                 }
                 break;
+//            case R.id.cl_message_main:
+//                switch (homeData.getIndexMsgVo().getMessageDate()){
+//                    case "0":
+//                        startActivity(new Intent(getActivity(), MessageDetailActivity.class).putExtra("id",messageAdapter.getData().get(position).getMsgId()));
+//                        break;
+//                    case "1":
+//                        startActivity(new Intent(getActivity(), QuestionnaireActivity.class).putExtra("id",messageAdapter.getData().get(position).getMsgId()));
+//                        break;
+//                }
+//                break;
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (indexPresenter==null){
+        if (indexPresenter == null) {
             indexPresenter = new IndexPresenter(this, getActivity());
         }
         indexPresenter.index();
@@ -109,7 +124,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            if (indexPresenter==null){
+            if (indexPresenter == null) {
                 indexPresenter = new IndexPresenter(this, getActivity());
             }
             indexPresenter.index();
@@ -132,9 +147,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             llCalendar.addView(weekDataLayout);
         }
         if (data.getIndexMsgVo() != null) {
-            if (data.getIndexMsgVo().getMessageContent().isEmpty()){
+            if (data.getIndexMsgVo().getMessageContent().isEmpty()) {
                 flEmptyMsg.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 flEmptyMsg.setVisibility(View.GONE);
                 tvMessageReceiver.setText(data.getIndexMsgVo().getMessageReceiver());
                 tvMessageSender.setText(data.getIndexMsgVo().getMessageSender());
