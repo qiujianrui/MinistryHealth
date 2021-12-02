@@ -15,14 +15,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.yhjx.ministryhealth.BuildConfig;
 import com.yhjx.ministryhealth.R;
 import com.yhjx.ministryhealth.base.BaseFragment;
 import com.yhjx.ministryhealth.bean.IndexBean;
+import com.yhjx.ministryhealth.bean.UpdateAppBean;
 import com.yhjx.ministryhealth.mvp.contract.IndexContract;
+import com.yhjx.ministryhealth.mvp.contract.UpdateAppContract;
 import com.yhjx.ministryhealth.mvp.presenter.IndexPresenter;
+import com.yhjx.ministryhealth.mvp.presenter.UpdateAppPresenter;
+import com.yhjx.ministryhealth.ui.dialog.UpdateAppDialog;
 import com.yhjx.ministryhealth.view.WeekDataLayout;
 
-public class HomeFragment extends BaseFragment implements View.OnClickListener, IndexContract.View {
+public class HomeFragment extends BaseFragment implements View.OnClickListener, IndexContract.View, UpdateAppContract.View {
 
     private TextView tvMsgContent;
     private LinearLayout llCalendar;
@@ -76,6 +81,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         flEmptyMsg = view.findViewById(R.id.fl_empty_msg);
         clMessageMain = view.findViewById(R.id.cl_message_main);
         clMessageMain.setOnClickListener(this);
+        UpdateAppPresenter updateAppPresenter=new UpdateAppPresenter(this,getActivity());
+        updateAppPresenter.getUpDateApp();
     }
 
     @Override
@@ -163,5 +170,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
         }
         tvPhone.setText(data.getHotTel());
+    }
+
+    @Override
+    public void UpDateAppSuccess(UpdateAppBean data) {
+        if (!data.getVersion().isEmpty() && Integer.valueOf(data.getVersion()) > BuildConfig.VERSION_CODE) {
+            UpdateAppDialog updateAppDialog = new UpdateAppDialog(getContext(), data);
+            updateAppDialog.show();
+        }
     }
 }
