@@ -73,5 +73,5 @@ public class UrlConstants {
     public static final String ADD_MSG="/prod-api/system/index/addMsg";
 
     //版本升级
-    static final String UPDATE_APP="/prod-api/system/version/list";
+    static final String UPDATE_APP="/prod-api/system/index/getVersion";
 }

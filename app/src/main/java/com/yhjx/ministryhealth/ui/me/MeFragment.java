@@ -131,6 +131,8 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Lo
         if (!data.getVersion().isEmpty() && Integer.valueOf(data.getVersion()) > BuildConfig.VERSION_CODE) {
             UpdateAppDialog updateAppDialog = new UpdateAppDialog(getContext(), data);
             updateAppDialog.show();
+        }else {
+            ToastUtils.showShort("已经是最新版本");
         }
     }
 }
