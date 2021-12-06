@@ -128,7 +128,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Lo
 
     @Override
     public void UpDateAppSuccess(UpdateAppBean data) {
-        if (!data.getVersion().isEmpty() && Integer.valueOf(data.getVersion()) > BuildConfig.VERSION_CODE) {
+        if (data!=null&&data.getVersion()!=null&&!data.getVersion().isEmpty() && Integer.valueOf(data.getVersion()) > BuildConfig.VERSION_CODE) {
             UpdateAppDialog updateAppDialog = new UpdateAppDialog(getContext(), data);
             updateAppDialog.show();
         }else {
