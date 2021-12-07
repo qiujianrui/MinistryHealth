@@ -111,8 +111,8 @@ public class CustomPainter implements CalendarPainter {
             drawPoint(canvas, rectF, localDate, mTodayCheckedPoint, noAlphaColor);
             drawHolidayWorkday(canvas, rectF, localDate, mAttrs.todayCheckedHoliday, mAttrs.todayCheckedWorkday, mAttrs.todayCheckedHolidayTextColor, mAttrs.todayCheckedWorkdayTextColor, noAlphaColor);
         } else {
-            drawBGPoint(canvas,rectF,localDate,mBGPointBackground,noAlphaColor);
             drawCheckedBackground(canvas, mTodayBackground, rectF, noAlphaColor);
+            drawBGPoint(canvas,rectF,localDate,mBGPointBackground,noAlphaColor);
             drawSolar(canvas, rectF, localDate, mAttrs.todayUnCheckedSolarTextColor, noAlphaColor);
             drawLunar(canvas, rectF, localDate, mAttrs.todayUnCheckedLunarTextColor, noAlphaColor);
             drawPoint(canvas, rectF, localDate, mTodayUnCheckedPoint, noAlphaColor);

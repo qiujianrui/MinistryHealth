@@ -95,7 +95,16 @@
         app:layout_constraintTop_toTopOf="@+id/tv_register"
         app:layout_constraintBottom_toBottomOf="@+id/tv_register"
         />
-
+    <CheckBox
+        android:id="@+id/radio_button_protocol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        app:layout_constraintTop_toTopOf="@+id/tv_protocol"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_protocol"
+        app:layout_constraintRight_toLeftOf="@+id/tv_protocol"
+        />
     <TextView
         android:id="@+id/tv_protocol"
         android:layout_width="wrap_content"

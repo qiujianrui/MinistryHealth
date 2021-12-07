@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -32,9 +34,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private TextView tvProtocol;
 
     private LoginPresenter loginPresenter;
+    private CheckBox radioButtonProtocol;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initView();
     }
 
     @Override
@@ -55,11 +60,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         tvResetPaw.setOnClickListener(this);
         tvProtocol = findViewById(R.id.tv_protocol);
         tvProtocol.setOnClickListener(this);
+        radioButtonProtocol = findViewById(R.id.radio_button_protocol);
     }
 
     @Override
     protected void initData() {
-        loginPresenter=new LoginPresenter(this,this);
+        loginPresenter = new LoginPresenter(this, this);
     }
 
     @Override
@@ -79,7 +85,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     ToastUtils.showShort("请输入密码");
                     return;
                 }
-                loginPresenter.login(editPhone.getText().toString(),editPaw.getText().toString());
+                if (!radioButtonProtocol.isChecked()){
+                    ToastUtils.showShort("请勾选同意隐私政策及用户协议");
+                    return;
+                }
+                loginPresenter.login(editPhone.getText().toString(), editPaw.getText().toString());
                 break;
             case R.id.tv_register:
                 startActivity(new Intent(this, RegisterActivity.class));
@@ -109,12 +119,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
             @Override
             public void onFailed(String s, String s1) {
-                Log.d("推送", "onFailed: "+s+"----"+s1);
+                Log.d("推送", "onFailed: " + s + "----" + s1);
             }
         });
-        SPUtils.getInstance().put(SpConstants.SP_KEY_PHONE,data.getPhone());
-        SPUtils.getInstance().put(SpConstants.SP_KEY_USER_TOKEN,data.getToken());
-        SPUtils.getInstance().put(SpConstants.SP_KEY_PATIENT_ID,data.getPatientId());
+        SPUtils.getInstance().put(SpConstants.SP_KEY_PHONE, data.getPhone());
+        SPUtils.getInstance().put(SpConstants.SP_KEY_USER_TOKEN, data.getToken());
+        SPUtils.getInstance().put(SpConstants.SP_KEY_PATIENT_ID, data.getPatientId());
         SPUtils.getInstance().put(SpConstants.SP_KEY_USER_DATA, JSON.toJSONString(data));
         startActivity(new Intent(this, MainActivity.class));
         finish();
