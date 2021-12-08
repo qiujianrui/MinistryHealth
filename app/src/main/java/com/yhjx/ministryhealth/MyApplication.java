@@ -16,6 +16,7 @@ import com.alibaba.sdk.android.push.register.MeizuRegister;
 import com.alibaba.sdk.android.push.register.MiPushRegister;
 import com.alibaba.sdk.android.push.register.OppoRegister;
 import com.alibaba.sdk.android.push.register.VivoRegister;
+import com.library.basemodule.util.Utils;
 import com.yhjx.ministryhealth.constants.ConfigConstants;
 import com.yhjx.ministryhealth.push.PushMessageIntentService;
 
@@ -24,6 +25,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Utils.init(this);
         initCloudChannel(this);
     }
 

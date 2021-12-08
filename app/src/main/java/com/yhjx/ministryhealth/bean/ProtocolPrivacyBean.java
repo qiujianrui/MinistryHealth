@@ -16,7 +16,7 @@ public class ProtocolPrivacyBean  {
     }
 
     public String getProtocolContent() {
-        return protocolContent;
+        return protocolContent.replace("深圳市镜象科技有限公司","深圳市仰和镜象技术有限公司");
     }
 
     public void setProtocolContent(String protocolContent) {
@@ -32,7 +32,7 @@ public class ProtocolPrivacyBean  {
     }
 
     public String getPrivacyContent() {
-        return privacyContent;
+        return privacyContent.replace("深圳市镜象科技有限公司","深圳市仰和镜象技术有限公司");
     }
 
     public void setPrivacyContent(String privacyContent) {
