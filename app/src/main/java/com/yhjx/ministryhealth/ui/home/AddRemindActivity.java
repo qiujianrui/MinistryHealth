@@ -187,7 +187,7 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
                 timeRemind + 1800000,
                 0, null
         );
-
+    //FREQ=DAILY;COUNT=30 每天发生一次，重复30次：
         // 添加事件
         int result = CalendarProviderManager.addCalendarEvent(this, calendarEvent);
 //        if (result == 0) {
