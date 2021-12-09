@@ -197,6 +197,7 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
 //        } else if (result == -2) {
 //            Toast.makeText(this, "没有权限", Toast.LENGTH_SHORT).show();
 //        }
+            setResult(200);
             finish();
     }
 }

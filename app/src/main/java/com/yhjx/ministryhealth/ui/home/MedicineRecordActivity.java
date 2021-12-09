@@ -1,5 +1,6 @@
 package com.yhjx.ministryhealth.ui.home;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -116,7 +117,7 @@ public class MedicineRecordActivity extends BaseActivity implements View.OnClick
                 calendar.toNextPager();
                 break;
             case R.id.img_add_record:
-                startActivity(new Intent(this,AddRecordActivity.class ).putExtra("dateCreate",selectLocalDate.toString("yyyy-MM-dd")));
+                startActivityForResult(new Intent(this,AddRecordActivity.class ).putExtra("dateCreate",selectLocalDate.toString("yyyy-MM-dd")),1);
                 break;
 
         }
@@ -135,5 +136,12 @@ public class MedicineRecordActivity extends BaseActivity implements View.OnClick
         medicineListAdapter.setList(data);
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1&&resultCode==200){
+            medicineRecordPresenter.getMedicineDate();
+            medicineRecordPresenter.getMedicine(selectLocalDate.toString("yyyy-MM-dd"));
+        }
+    }
 }

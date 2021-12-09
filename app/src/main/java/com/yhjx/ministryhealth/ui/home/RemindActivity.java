@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -121,7 +122,7 @@ public class RemindActivity extends BaseActivity implements View.OnClickListener
                 calendar.toNextPager();
                 break;
             case R.id.img_add_record:
-                startActivity(new Intent(this,AddRemindActivity.class ));
+                startActivityForResult(new Intent(this,AddRemindActivity.class ),1);
                 break;
 
         }
@@ -138,5 +139,14 @@ public class RemindActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void getRemind(List<RemindListBean> data) {
         remindListAdapter.setList(data);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode==1&&resultCode==200){
+            remindPresenter.getRemindDate();
+            remindPresenter.getRemind(selectLocalDate.toString("yyyy-MM-dd"));
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

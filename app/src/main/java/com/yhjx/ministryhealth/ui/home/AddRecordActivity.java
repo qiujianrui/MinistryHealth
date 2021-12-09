@@ -100,6 +100,7 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void addMedicineSuccess(BaseEntity data) {
         ToastUtils.showShort("添加成功");
+        setResult(200);
         finish();
 
     }
