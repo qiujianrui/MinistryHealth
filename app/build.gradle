@@ -85,4 +85,5 @@ dependencies {
     implementation 'com.aliyun.ams:alicloud-android-third-push-vivo:3.7.0'
 //魅族依赖
     implementation 'com.aliyun.ams:alicloud-android-third-push-meizu:3.7.0'
+    implementation 'io.github.razerdp:BasePopup:3.2.0'
 }
