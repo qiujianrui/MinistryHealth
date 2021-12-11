@@ -42,9 +42,10 @@ public class RemindPresenter extends BasePresenter<RemindContract.View> implemen
     }
 
     @Override
-    public void getRemind(String dateCreate) {
+    public void getRemind(String dateCreate,String type) {
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("dateCreate", dateCreate);
+        hashMap.put("dateEnd", dateCreate);
+        hashMap.put("type", type);
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), JSON.toJSONString(hashMap));
         AppHttpUtils.getApiService().getRemind(requestBody)
                 .compose(RxHelper.ioMain())

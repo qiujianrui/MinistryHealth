@@ -9,7 +9,7 @@ import java.util.List;
 public interface RemindContract {
         interface Presenter {
                 void getRemindDate();
-                void getRemind(String dateCreate);
+                void getRemind(String dateCreate,String type);
             }
 
             interface View extends IView {

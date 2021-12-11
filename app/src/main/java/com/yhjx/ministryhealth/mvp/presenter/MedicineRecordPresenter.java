@@ -45,14 +45,15 @@ public class MedicineRecordPresenter extends BasePresenter<MedicineRecordContrac
     @Override
     public void getMedicine(String dateCreate) {
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("dateCreate", dateCreate);
+        hashMap.put("dateEnd", dateCreate);
+        hashMap.put("type", "0");
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), JSON.toJSONString(hashMap));
-        AppHttpUtils.getApiService().getMedicine(requestBody)
+        AppHttpUtils.getApiService().getRemind(requestBody)
                 .compose(RxHelper.ioMain())
-                .subscribe(new BaseObserver<BaseEntity<List<MedicineListBean>>>(activityRef.get()) {
+                .subscribe(new BaseObserver<BaseEntity<List<RemindListBean>>>(activityRef.get()) {
 
                     @Override
-                    public void onSuccess(BaseEntity<List<MedicineListBean>> result) {
+                    public void onSuccess(BaseEntity<List<RemindListBean>> result) {
                         getView().getMedicine(result.getData());
                     }
 

@@ -46,7 +46,9 @@
             android:exported="true" />
         <activity
             android:name=".ui.home.AddRemindActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize"
+            />
         <activity
             android:name=".ui.home.RemindActivity"
             android:exported="true" />

@@ -3,6 +3,7 @@ package com.yhjx.ministryhealth.api;
 
 import com.library.basemodule.entity.BaseEntity;
 import com.yhjx.ministryhealth.bean.ChatMsgBean;
+import com.yhjx.ministryhealth.bean.DrugNameBean;
 import com.yhjx.ministryhealth.bean.IndexBean;
 import com.yhjx.ministryhealth.bean.LoginBean;
 import com.yhjx.ministryhealth.bean.MedicineListBean;
@@ -117,4 +118,12 @@ public interface ApiService {
     //版本升级
     @POST(UrlConstants.UPDATE_APP)
     Observable<BaseEntity<UpdateAppBean>> UpdateApp( );
+
+    //模糊查询
+    @POST(UrlConstants.GET_DRUG)
+    Observable<BaseEntity<List<DrugNameBean>>> getDrug(@Body RequestBody requestBody);
+
+    //修改服药状态
+    @POST(UrlConstants.UPD_REMIND_INFO)
+    Observable<BaseEntity> updRemindInfo(@Body RequestBody requestBody);
 }

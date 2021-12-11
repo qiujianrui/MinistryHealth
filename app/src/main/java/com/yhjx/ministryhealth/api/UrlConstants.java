@@ -74,4 +74,10 @@ public class UrlConstants {
 
     //版本升级
     static final String UPDATE_APP="/prod-api/system/index/getVersion";
+
+    //模糊查询药品
+    static final String GET_DRUG="/prod-api/system/index/getDrug";
+
+    //修改服药状态
+    static final String UPD_REMIND_INFO="/prod-api/system/index/updRemindInfo";
 }

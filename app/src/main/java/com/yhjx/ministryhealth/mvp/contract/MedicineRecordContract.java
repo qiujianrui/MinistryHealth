@@ -15,6 +15,6 @@ public interface MedicineRecordContract {
 
     interface View extends IView {
         void getMedicineDateSuccess(List<String> data);
-        void getMedicine(List<MedicineListBean> data);
+        void getMedicine(List<RemindListBean> data);
     }
 }

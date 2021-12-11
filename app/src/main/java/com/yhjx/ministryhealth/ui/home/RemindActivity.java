@@ -103,7 +103,7 @@ public class RemindActivity extends BaseActivity implements View.OnClickListener
 //                } else {
                     tvSelectedDate.setText(year + "  " + month);
 //                }
-                remindPresenter.getRemind(selectLocalDate.toString("yyyy-MM-dd"));
+                remindPresenter.getRemind(selectLocalDate.toString("yyyy-MM-dd"),"1");
 
             }
         });
@@ -145,7 +145,7 @@ public class RemindActivity extends BaseActivity implements View.OnClickListener
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode==1&&resultCode==200){
             remindPresenter.getRemindDate();
-            remindPresenter.getRemind(selectLocalDate.toString("yyyy-MM-dd"));
+            remindPresenter.getRemind(selectLocalDate.toString("yyyy-MM-dd"),"1");
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

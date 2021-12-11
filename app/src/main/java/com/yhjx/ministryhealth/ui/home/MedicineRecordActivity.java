@@ -18,6 +18,7 @@ import com.necer.listener.OnCalendarChangedListener;
 import com.yhjx.ministryhealth.R;
 import com.yhjx.ministryhealth.base.BaseActivity;
 import com.yhjx.ministryhealth.bean.MedicineListBean;
+import com.yhjx.ministryhealth.bean.RemindListBean;
 import com.yhjx.ministryhealth.mvp.contract.MedicineRecordContract;
 import com.yhjx.ministryhealth.mvp.presenter.MedicineRecordPresenter;
 import com.yhjx.ministryhealth.painter.BlackBackground;
@@ -132,7 +133,7 @@ public class MedicineRecordActivity extends BaseActivity implements View.OnClick
     }
 
     @Override
-    public void getMedicine(List<MedicineListBean> data) {
+    public void getMedicine(List<RemindListBean> data) {
         medicineListAdapter.setList(data);
     }
 
