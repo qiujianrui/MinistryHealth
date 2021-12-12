@@ -1,6 +1,8 @@
 package com.yhjx.ministryhealth.bean;
 
-public class RemindListBean {
+import java.io.Serializable;
+
+public class RemindListBean implements Serializable {
 
 
     /**
@@ -42,7 +44,6 @@ public class RemindListBean {
     private Object updateBy;
     private Object updateTime;
     private Object remark;
-    private ParamsBean params;
     private int id;
     private String remindData;
     private String dateStart;
@@ -58,14 +59,23 @@ public class RemindListBean {
     private String dateLong;
     private String drugLongNum;
     private String status;
-    private Object statusLong;
-    private Object drugType;
+    private String statusLong;
+    private String drugType;
     private String remindId;
     private String forenoonUnit;
     private String noonUnit;
     private String afternoonUnit;
     private String longUnit;
     private String longPeriod;
+    private String dateId;
+
+    public String getDateId() {
+        return dateId;
+    }
+
+    public void setDateId(String dateId) {
+        this.dateId = dateId;
+    }
 
     public Object getSearchValue() {
         return searchValue;
@@ -115,13 +125,7 @@ public class RemindListBean {
         this.remark = remark;
     }
 
-    public ParamsBean getParams() {
-        return params;
-    }
 
-    public void setParams(ParamsBean params) {
-        this.params = params;
-    }
 
     public int getId() {
         return id;
@@ -243,19 +247,19 @@ public class RemindListBean {
         this.status = status;
     }
 
-    public Object getStatusLong() {
+    public String getStatusLong() {
         return statusLong;
     }
 
-    public void setStatusLong(Object statusLong) {
+    public void setStatusLong(String statusLong) {
         this.statusLong = statusLong;
     }
 
-    public Object getDrugType() {
+    public String getDrugType() {
         return drugType;
     }
 
-    public void setDrugType(Object drugType) {
+    public void setDrugType(String drugType) {
         this.drugType = drugType;
     }
 
@@ -307,6 +311,5 @@ public class RemindListBean {
         this.longPeriod = longPeriod;
     }
 
-    public static class ParamsBean {
-    }
+
 }

@@ -1,9 +1,11 @@
 package com.yhjx.ministryhealth.ui.home;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemChildClickListener;
+import com.library.basemodule.dialog.CommonDialog;
+import com.library.basemodule.listener.OnConfirmClickListener;
 import com.necer.calendar.BaseCalendar;
 import com.necer.calendar.Miui10Calendar;
 import com.necer.enumeration.DateChangeBehavior;
@@ -103,6 +109,43 @@ public class MedicineRecordActivity extends BaseActivity implements View.OnClick
 
             }
         });
+        medicineListAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+                if (view.getId()==R.id.check_drug){
+                    if (medicineListAdapter.getData().get(position).getStatus().equals("1")) {
+                        CommonDialog commonLogoutDialog = new CommonDialog(mContext);
+                        commonLogoutDialog.setMessage("是否确认已经服药?").setCancel("取消").setConfirm("确定")
+                                .setOnConfirmClickListener(new OnConfirmClickListener() {
+                                    @Override
+                                    public void onConfirmClick(Dialog dialog, View view) {
+                                        medicineRecordPresenter.updRemindInfo(medicineListAdapter.getData().get(position).getRemindId(), "0");
+                                    }
+                                });
+                        commonLogoutDialog.show();
+                    }
+                }
+                else if (view.getId()==R.id.check_drugLong){
+                    if (medicineListAdapter.getData().get(position).getStatusLong().equals("1")) {
+                        CommonDialog commonLogoutDialog = new CommonDialog(mContext);
+                        commonLogoutDialog.setMessage("是否确认已经服药?").setCancel("取消").setConfirm("确定")
+                                .setOnConfirmClickListener(new OnConfirmClickListener() {
+                                    @Override
+                                    public void onConfirmClick(Dialog dialog, View view) {
+                                        medicineRecordPresenter.updRemindInfo(medicineListAdapter.getData().get(position).getRemindId(), "1");
+
+                                    }
+                                });
+                        commonLogoutDialog.show();
+                    }
+                }
+                else if (view.getId()==R.id.img_edit){
+                    startActivityForResult(new Intent(MedicineRecordActivity.this,AddRecordActivity.class)
+                    .putExtra("data",medicineListAdapter.getData().get(position))
+                            ,1);
+                }
+            }
+        });
     }
 
     @Override
@@ -135,6 +178,11 @@ public class MedicineRecordActivity extends BaseActivity implements View.OnClick
     @Override
     public void getMedicine(List<RemindListBean> data) {
         medicineListAdapter.setList(data);
+    }
+
+    @Override
+    public void updRemindInfoSuccess() {
+        medicineRecordPresenter.getMedicine(selectLocalDate.toString("yyyy-MM-dd"));
     }
 
     @Override

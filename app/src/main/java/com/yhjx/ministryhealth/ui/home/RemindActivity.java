@@ -1,5 +1,6 @@
 package com.yhjx.ministryhealth.ui.home;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,10 +8,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemChildClickListener;
+import com.library.basemodule.dialog.CommonDialog;
+import com.library.basemodule.listener.OnConfirmClickListener;
 import com.necer.calendar.BaseCalendar;
 import com.necer.calendar.Miui10Calendar;
 import com.necer.calendar.MonthCalendar;
@@ -107,6 +113,17 @@ public class RemindActivity extends BaseActivity implements View.OnClickListener
 
             }
         });
+        remindListAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+               if (view.getId()==R.id.img_edit){
+                    startActivityForResult(new Intent(RemindActivity.this,AddRemindActivity.class)
+                                    .putExtra("data",remindListAdapter.getData().get(position))
+                            ,1);
+                }
+            }
+        });
+
     }
 
     @Override

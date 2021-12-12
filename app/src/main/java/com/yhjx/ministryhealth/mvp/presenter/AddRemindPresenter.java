@@ -23,7 +23,7 @@ public class AddRemindPresenter extends BasePresenter<AddRemindContract.View> im
     }
 
     @Override
-    public void addRemind(String type, String remindData, String dateStart,String dateCreate) {
+    public void addRemind(String type, String remindData,String dateCreate) {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("type", type);
         hashMap.put("remindData", remindData);
@@ -76,6 +76,25 @@ public class AddRemindPresenter extends BasePresenter<AddRemindContract.View> im
                     @Override
                     public void onSuccess(BaseEntity<List<DrugNameBean>> result) {
                         getView().getDrugSuccess(result.getData());
+                    }
+
+                    @Override
+                    public void onFailure(int errCode, String msg) {
+                        getView().loadFailure(errCode, msg, "");
+                    }
+                });
+    }
+
+    @Override
+    public void revampRemindInfo(HashMap<String, Object> hashMap) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), JSON.toJSONString(hashMap));
+        AppHttpUtils.getApiService().revampRemindInfo(requestBody)
+                .compose(RxHelper.ioMain())
+                .subscribe(new BaseObserver<BaseEntity>(activityRef.get()) {
+
+                    @Override
+                    public void onSuccess(BaseEntity result) {
+                        getView().revampRemindInfoSuccess();
                     }
 
                     @Override

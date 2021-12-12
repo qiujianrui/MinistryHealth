@@ -1,5 +1,8 @@
 package com.yhjx.ministryhealth.ui.adapter;
 
+import android.widget.CheckBox;
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -11,6 +14,7 @@ import com.yhjx.ministryhealth.bean.RemindListBean;
 public class MedicineListAdapter extends BaseQuickAdapter<RemindListBean, BaseViewHolder> {
     public MedicineListAdapter() {
         super(R.layout.item_medicine_record2);
+        addChildClickViewIds(R.id.check_drug,R.id.check_drugLong,R.id.img_edit);
     }
 
     @Override
@@ -25,6 +29,12 @@ public class MedicineListAdapter extends BaseQuickAdapter<RemindListBean, BaseVi
                             "中:"+data.getNoonUnit()+";"+
                             "晚:"+data.getAfternoonUnit()+";"
                     );
+            ImageView checkBox=baseViewHolder.getView(R.id.check_drug);
+            if (data.getStatus().equals("0")){
+                checkBox.setSelected(true);
+            }else {
+                checkBox.setSelected(false);
+            }
         }
 
         if (data.getDrugLongName().isEmpty()){
@@ -32,9 +42,14 @@ public class MedicineListAdapter extends BaseQuickAdapter<RemindListBean, BaseVi
         }else {
             baseViewHolder.setGone(R.id.cl_drugLong, false);
             baseViewHolder.setText(R.id.tv_drugLongName,data.getDrugLongName());
-            baseViewHolder.setText(R.id.tv_dateLong,data.getLongPeriod());
-            baseViewHolder.setText(R.id.tv_drugLongNum,data.getLongUnit());
-
+            baseViewHolder.setText(R.id.tv_dateLong_time,data.getDateStart());
+            baseViewHolder.setText(R.id.tv_drugLongNum,data.getLongPeriod()+" "+data.getLongUnit());
+            ImageView checkBox=baseViewHolder.getView(R.id.check_drugLong);
+            if (data.getStatusLong().equals("0")){
+                checkBox.setSelected(true);
+            }else {
+                checkBox.setSelected(false);
+            }
         }
 
         if (data.getDrugLongName().isEmpty()||data.getDrugName().isEmpty()){

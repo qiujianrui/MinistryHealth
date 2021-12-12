@@ -11,10 +11,12 @@ public interface MedicineRecordContract {
     interface Presenter {
         void getMedicineDate();
         void getMedicine(String dateCreate);
+        void updRemindInfo(String remindId,String drugType);
     }
 
     interface View extends IView {
         void getMedicineDateSuccess(List<String> data);
         void getMedicine(List<RemindListBean> data);
+        void updRemindInfoSuccess();
     }
 }

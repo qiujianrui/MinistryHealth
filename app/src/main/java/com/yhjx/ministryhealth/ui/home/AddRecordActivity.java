@@ -26,6 +26,7 @@ import com.library.basemodule.util.ToastUtils;
 import com.yhjx.ministryhealth.R;
 import com.yhjx.ministryhealth.base.BaseActivity;
 import com.yhjx.ministryhealth.bean.DrugNameBean;
+import com.yhjx.ministryhealth.bean.RemindListBean;
 import com.yhjx.ministryhealth.mvp.contract.AddMedicineContract;
 import com.yhjx.ministryhealth.mvp.contract.AddRemindContract;
 import com.yhjx.ministryhealth.mvp.presenter.AddMedicinePresenter;
@@ -70,6 +71,8 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
 
     private AddRemindPresenter addRemindPresenter;
 
+    private RemindListBean remindListData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +114,25 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
         addRemindPresenter = new AddRemindPresenter(this, this);
         dateCreate = getIntent().getStringExtra("dateCreate");
         addMedicinePresenter = new AddMedicinePresenter(this, this);
+
+        remindListData= (RemindListBean) getIntent().getSerializableExtra("data");
+        //修改 获取数据
+        if (remindListData!=null){
+            if (remindListData.getType().equals("0")){
+                llTypeMedicine.setVisibility(View.VISIBLE);
+                tvTime.setText(remindListData.getDateCreate());
+                editMedicineName.setText(remindListData.getDrugName());
+                editForenoonDose.setText(remindListData.getForenoon());
+                editNoonDose.setText(remindListData.getNoon());
+                editAfternoonDose.setText(remindListData.getAfternoon());
+                editDrugLongName.setText(remindListData.getDrugLongName());
+                editDateLong.setText(remindListData.getDateLong());
+                editDrugLongNum.setText(remindListData.getDrugLongNum());
+            }else if (remindListData.getType().equals("1")){
+                llTypeMedicine.setVisibility(View.GONE);
+                tvTime.setText(remindListData.getDateCreate());
+            }
+        }
     }
 
     @Override
@@ -209,8 +231,6 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
                 pvTime.show();
                 break;
             case R.id.tv_save:
-                SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-
                 if (tvTime.getText().toString().isEmpty()) {
                     ToastUtils.showShort("请选取日期");
                     return;
@@ -235,8 +255,7 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
                     HashMap<String, Object> hashMap = new HashMap<>();
                     hashMap.put("type", "0");
                     hashMap.put("remindData", "服药提醒");
-                    String dateStart= format.format(dateSelect);
-                    hashMap.put("dateStart", dateStart);
+
                     hashMap.put("dateCreate", tvTime.getText().toString());
                     hashMap.put("drugName",editMedicineName.getText().toString());
                     hashMap.put("forenoon",editForenoonDose.getText().toString());
@@ -245,7 +264,12 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
                     hashMap.put("drugLongName",editDrugLongName.getText().toString());
                     hashMap.put("dateLong",editDateLong.getText().toString());
                     hashMap.put("drugLongNum",editDrugLongNum.getText().toString());
+                if (remindListData==null) {
                     addRemindPresenter.addRemindDrug(hashMap);
+                }else {
+                    hashMap.put("dateId",remindListData.getDateId());
+                    addRemindPresenter.revampRemindInfo(hashMap);
+                }
                 break;
         }
     }
@@ -271,5 +295,12 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
             listSearch.setVisibility(View.VISIBLE);
             searchDrugAdapter.setList(data);
         }
+    }
+
+    @Override
+    public void revampRemindInfoSuccess() {
+        ToastUtils.showShort("修改成功");
+        setResult(200);
+        finish();
     }
 }

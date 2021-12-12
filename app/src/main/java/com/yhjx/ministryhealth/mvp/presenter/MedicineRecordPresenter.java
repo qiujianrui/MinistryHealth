@@ -63,4 +63,26 @@ public class MedicineRecordPresenter extends BasePresenter<MedicineRecordContrac
                     }
                 });
     }
+
+    @Override
+    public void updRemindInfo(String remindId, String drugType) {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("remindId", remindId);
+        hashMap.put("drugType", drugType);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), JSON.toJSONString(hashMap));
+        AppHttpUtils.getApiService().updRemindInfo(requestBody)
+                .compose(RxHelper.ioMain())
+                .subscribe(new BaseObserver<BaseEntity>(activityRef.get()) {
+
+                    @Override
+                    public void onSuccess(BaseEntity result) {
+                        getView().updRemindInfoSuccess();
+                    }
+
+                    @Override
+                    public void onFailure(int errCode, String msg) {
+                        getView().loadFailure(errCode, msg, "");
+                    }
+                });
+    }
 }

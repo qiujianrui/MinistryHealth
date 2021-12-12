@@ -126,4 +126,9 @@ public interface ApiService {
     //修改服药状态
     @POST(UrlConstants.UPD_REMIND_INFO)
     Observable<BaseEntity> updRemindInfo(@Body RequestBody requestBody);
+
+    //修改服药
+    @POST(UrlConstants.REVAMP_REMIND_INFO)
+    Observable<BaseEntity> revampRemindInfo(@Body RequestBody requestBody);
+
 }

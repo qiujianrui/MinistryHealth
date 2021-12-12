@@ -35,6 +35,7 @@ import com.library.basemodule.util.ToastUtils;
 import com.yhjx.ministryhealth.R;
 import com.yhjx.ministryhealth.base.BaseActivity;
 import com.yhjx.ministryhealth.bean.DrugNameBean;
+import com.yhjx.ministryhealth.bean.RemindListBean;
 import com.yhjx.ministryhealth.mvp.contract.AddRemindContract;
 import com.yhjx.ministryhealth.mvp.presenter.AddRemindPresenter;
 import com.yhjx.ministryhealth.util.DataUtil;
@@ -77,6 +78,8 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
     private boolean isSearchSelect;
     private int searchEditState; // 1 药品 2 长针剂
     private Date dateSelect;
+
+    private RemindListBean remindListData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,6 +131,28 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void initData() {
         addRemindPresenter = new AddRemindPresenter(this, this);
+        remindListData= (RemindListBean) getIntent().getSerializableExtra("data");
+        //修改 获取数据
+        if (remindListData!=null){
+            if (remindListData.getType().equals("0")){
+                llTypeMedicine.setVisibility(View.VISIBLE);
+                selectType="0";
+                tvType.setText(remindListData.getRemindData());
+                remindData=remindListData.getRemindData();
+                tvTime.setText(remindListData.getDateCreate());
+                editMedicineName.setText(remindListData.getDrugName());
+                editForenoonDose.setText(remindListData.getForenoon());
+                editNoonDose.setText(remindListData.getNoon());
+                editAfternoonDose.setText(remindListData.getAfternoon());
+                editDrugLongName.setText(remindListData.getDrugLongName());
+                editDateLong.setText(remindListData.getDateLong());
+                editDrugLongNum.setText(remindListData.getDrugLongNum());
+            }else if (remindListData.getType().equals("1")){
+            llTypeMedicine.setVisibility(View.GONE);
+                selectType="1";
+                tvTime.setText(remindListData.getDateCreate());
+            }
+        }
     }
 
     @Override
@@ -212,6 +237,10 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.tv_type:
+                if (remindListData!=null){
+                    ToastUtils.showShort("无法修改类型");
+                    return;
+                }
                 List<String> optionsType = new ArrayList<>();
                 List<String> optionsTypeState = new ArrayList<>();
                 optionsType.add("服药提醒");
@@ -275,7 +304,6 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
                 pvOptions.show();
                 break;
             case R.id.tv_save:
-                SimpleDateFormat format = new SimpleDateFormat("HH:mm");
                 if (tvType.getText().toString().isEmpty()) {
                     ToastUtils.showShort("请选择标题类型");
                     return;
@@ -306,7 +334,6 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
                     HashMap<String, Object> hashMap = new HashMap<>();
                     hashMap.put("type", selectType);
                     hashMap.put("remindData", remindData);
-                    String dateStart= format.format(dateSelect);
                     hashMap.put("dateCreate", tvTime.getText().toString());
                     hashMap.put("drugName",editMedicineName.getText().toString());
                     hashMap.put("forenoon",editForenoonDose.getText().toString());
@@ -315,11 +342,24 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
                     hashMap.put("drugLongName",editDrugLongName.getText().toString());
                     hashMap.put("dateLong",editDateLong.getText().toString());
                     hashMap.put("drugLongNum",editDrugLongNum.getText().toString());
-                    addRemindPresenter.addRemindDrug(hashMap);
+                    if (remindListData==null) {
+                        addRemindPresenter.addRemindDrug(hashMap);
+                    }else {
+                        hashMap.put("dateId",remindListData.getDateId());
+                        addRemindPresenter.revampRemindInfo(hashMap);
+                    }
                 }
                 if (selectType.equals("1")){
-                    String dateStart= format.format(dateSelect);
-                    addRemindPresenter.addRemind(selectType, remindData, dateStart,tvTime.getText().toString());
+                    if (remindListData==null) {
+                        addRemindPresenter.addRemind(selectType, remindData,tvTime.getText().toString());
+                    }else {
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("type", selectType);
+                        hashMap.put("remindData", remindData);
+                        hashMap.put("dateCreate", tvTime.getText().toString());
+                        hashMap.put("dateId", remindListData.getDateId());
+                        addRemindPresenter.revampRemindInfo(hashMap);
+                    }
                 }
 
                 break;
@@ -330,18 +370,18 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
     public void addRemindSuccess(BaseEntity data) {
         ToastUtils.showShort("添加成功");
         //添加提醒到日历
-        long timeRemind = DataUtil.date2TimeStamp(tvTime.getText().toString(), "yyyy-MM-dd HH:mm:00");
-        CalendarEvent calendarEvent = new CalendarEvent(
-                tvType.getText().toString(),
-                "",
-                "",
-                timeRemind,
-                timeRemind + 1800000,
-                0, null
-        );
+//        long timeRemind = DataUtil.date2TimeStamp(tvTime.getText().toString(), "yyyy-MM-dd HH:mm:00");
+//        CalendarEvent calendarEvent = new CalendarEvent(
+//                tvType.getText().toString(),
+//                "",
+//                "",
+//                timeRemind,
+//                timeRemind + 1800000,
+//                0, null
+//        );
         //FREQ=DAILY;COUNT=30 每天发生一次，重复30次：
         // 添加事件
-        int result = CalendarProviderManager.addCalendarEvent(this, calendarEvent);
+       //int result = CalendarProviderManager.addCalendarEvent(this, calendarEvent);
 //        if (result == 0) {
 //            Toast.makeText(this, "插入成功", Toast.LENGTH_SHORT).show();
 //        } else if (result == -1) {
@@ -359,5 +399,12 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
             listSearch.setVisibility(View.VISIBLE);
             searchDrugAdapter.setList(data);
         }
+    }
+
+    @Override
+    public void revampRemindInfoSuccess() {
+        ToastUtils.showShort("修改成功");
+        setResult(200);
+        finish();
     }
 }

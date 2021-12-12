@@ -80,4 +80,7 @@ public class UrlConstants {
 
     //修改服药状态
     static final String UPD_REMIND_INFO="/prod-api/system/index/updRemindInfo";
+
+    //修改服药状态
+    static final String REVAMP_REMIND_INFO="/prod-api/system/index/revampRemindInfo";
 }
