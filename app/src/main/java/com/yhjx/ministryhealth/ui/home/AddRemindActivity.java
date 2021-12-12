@@ -77,8 +77,8 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
     private ScrollView scrollLayout;
     private boolean isSearchSelect;
     private int searchEditState; // 1 药品 2 长针剂
-    private Date dateSelect;
-
+    private String dateSelect;
+    private String dateCreate;
     private RemindListBean remindListData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +132,7 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
     protected void initData() {
         addRemindPresenter = new AddRemindPresenter(this, this);
         remindListData= (RemindListBean) getIntent().getSerializableExtra("data");
+        dateCreate = getIntent().getStringExtra("dateCreate");
         //修改 获取数据
         if (remindListData!=null){
             if (remindListData.getType().equals("0")){
@@ -139,7 +140,7 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
                 selectType="0";
                 tvType.setText(remindListData.getRemindData());
                 remindData=remindListData.getRemindData();
-                tvTime.setText(remindListData.getDateCreate());
+                tvTime.setText(remindListData.getDateStart());
                 editMedicineName.setText(remindListData.getDrugName());
                 editForenoonDose.setText(remindListData.getForenoon());
                 editNoonDose.setText(remindListData.getNoon());
@@ -152,6 +153,8 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
                 selectType="1";
                 tvTime.setText(remindListData.getDateCreate());
             }
+            dateCreate=remindListData.getDateEnd();
+            dateSelect=remindListData.getDateStart()+":00";
         }
     }
 
@@ -271,12 +274,12 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
                 TimePickerView pvTime = new TimePickerBuilder(this, new OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {//选中事件回调
-                        dateSelect=date;
+                        dateSelect=DataUtil.getDateHMS(date);
                         tvTime.setText(DataUtil.getDateHM(date));
 
                     }
                 })
-                        .setType(new boolean[]{true, true, true, true, true, false})
+                        .setType(new boolean[]{false, false, false, true, true, false})
                         .build();
                 pvTime.setTitleText("选取日期");
                 pvTime.show();
@@ -334,7 +337,7 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
                     HashMap<String, Object> hashMap = new HashMap<>();
                     hashMap.put("type", selectType);
                     hashMap.put("remindData", remindData);
-                    hashMap.put("dateCreate", tvTime.getText().toString());
+                    hashMap.put("dateCreate",  dateCreate+" "+dateSelect);
                     hashMap.put("drugName",editMedicineName.getText().toString());
                     hashMap.put("forenoon",editForenoonDose.getText().toString());
                     hashMap.put("noon",editNoonDose.getText().toString());

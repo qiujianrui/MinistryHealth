@@ -139,7 +139,7 @@ public class RemindActivity extends BaseActivity implements View.OnClickListener
                 calendar.toNextPager();
                 break;
             case R.id.img_add_record:
-                startActivityForResult(new Intent(this,AddRemindActivity.class ),1);
+                startActivityForResult(new Intent(this,AddRemindActivity.class ).putExtra("dateCreate",selectLocalDate.toString("yyyy-MM-dd")),1);
                 break;
 
         }

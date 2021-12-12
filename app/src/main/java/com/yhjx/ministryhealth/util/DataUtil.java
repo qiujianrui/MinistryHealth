@@ -20,10 +20,14 @@ public class DataUtil {
     }
 
     public static String getDateHM(Date date) {//可根据需要自行截取数据显示
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:00");
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
         return format.format(date);
     }
 
+    public static String getDateHMS(Date date) {//可根据需要自行截取数据显示
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:00");
+        return format.format(date);
+    }
     public static long date2TimeStamp(String date, String format) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat(format);
@@ -32,5 +36,24 @@ public class DataUtil {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    /**
+     * 获取当前时间
+     *
+     * @return
+     */
+    public static Date getDate(String str) {
+        try {
+            java.text.SimpleDateFormat formatter = new SimpleDateFormat(
+                    "yyyy-MM-dd HH:mm:ss");
+            Date date = formatter.parse(str);
+            return date;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return null;
+
+
     }
 }

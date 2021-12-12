@@ -35,6 +35,7 @@ import com.yhjx.ministryhealth.util.DataUtil;
 import com.yhjx.ministryhealth.view.popup.SearchDrugAdapter;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -67,7 +68,7 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
     private SearchDrugAdapter searchDrugAdapter;
     private boolean isSearchSelect;
     private int searchEditState; // 1 药品 2 长针剂
-    private Date dateSelect;
+    private String dateSelect="";
 
     private AddRemindPresenter addRemindPresenter;
 
@@ -120,7 +121,7 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
         if (remindListData!=null){
             if (remindListData.getType().equals("0")){
                 llTypeMedicine.setVisibility(View.VISIBLE);
-                tvTime.setText(remindListData.getDateCreate());
+                tvTime.setText(remindListData.getDateStart());
                 editMedicineName.setText(remindListData.getDrugName());
                 editForenoonDose.setText(remindListData.getForenoon());
                 editNoonDose.setText(remindListData.getNoon());
@@ -132,6 +133,8 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
                 llTypeMedicine.setVisibility(View.GONE);
                 tvTime.setText(remindListData.getDateCreate());
             }
+            dateCreate=remindListData.getDateEnd();
+            dateSelect=remindListData.getDateStart()+":00";
         }
     }
 
@@ -220,14 +223,21 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
                 TimePickerView pvTime = new TimePickerBuilder(this, new OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {//选中事件回调
-                        dateSelect=date;
+                        dateSelect=DataUtil.getDateHMS(date);
                         tvTime.setText(DataUtil.getDateHM(date));
 
                     }
                 })
-                        .setType(new boolean[]{true, true, true, true, true, false})
+                        .setType(new boolean[]{false, false, false, true, true, false})
                         .build();
                 pvTime.setTitleText("选取日期");
+
+//                if (remindListData!=null) {
+//                    dateSelect = DataUtil.getDate(remindListData.getDateCreate());
+//                    Calendar calendar = Calendar.getInstance();
+//                    calendar.setTime(dateSelect);
+//                    pvTime.setDate(calendar);
+//                }
                 pvTime.show();
                 break;
             case R.id.tv_save:
@@ -256,7 +266,7 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
                     hashMap.put("type", "0");
                     hashMap.put("remindData", "服药提醒");
 
-                    hashMap.put("dateCreate", tvTime.getText().toString());
+                    hashMap.put("dateCreate", dateCreate+" "+dateSelect);
                     hashMap.put("drugName",editMedicineName.getText().toString());
                     hashMap.put("forenoon",editForenoonDose.getText().toString());
                     hashMap.put("noon",editNoonDose.getText().toString());
