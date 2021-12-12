@@ -53,6 +53,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            // abc_渠道名_版本名.apk  还可以拼接其他app内容：variant.versionCode  variant.buildType.name
+            outputFileName = "ygxx_${variant.name}_v${variant.versionName}.apk"
+        }
+    }
 }
 
 dependencies {
