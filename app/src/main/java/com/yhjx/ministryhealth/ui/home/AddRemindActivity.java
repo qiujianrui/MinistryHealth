@@ -135,6 +135,7 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
         dateCreate = getIntent().getStringExtra("dateCreate");
         //修改 获取数据
         if (remindListData!=null){
+            tvTitle.setText("修改提醒");
             if (remindListData.getType().equals("0")){
                 llTypeMedicine.setVisibility(View.VISIBLE);
                 selectType="0";
@@ -151,7 +152,8 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
             }else if (remindListData.getType().equals("1")){
             llTypeMedicine.setVisibility(View.GONE);
                 selectType="1";
-                tvTime.setText(remindListData.getDateCreate());
+                tvType.setText(remindListData.getRemindData());
+                tvTime.setText(remindListData.getDateStart());
             }
             dateCreate=remindListData.getDateEnd();
             dateSelect=remindListData.getDateStart()+":00";
@@ -354,12 +356,12 @@ public class AddRemindActivity extends BaseActivity implements View.OnClickListe
                 }
                 if (selectType.equals("1")){
                     if (remindListData==null) {
-                        addRemindPresenter.addRemind(selectType, remindData,tvTime.getText().toString());
+                        addRemindPresenter.addRemind(selectType, remindData,dateCreate+" "+dateSelect);
                     }else {
                         HashMap<String, Object> hashMap = new HashMap<>();
                         hashMap.put("type", selectType);
                         hashMap.put("remindData", remindData);
-                        hashMap.put("dateCreate", tvTime.getText().toString());
+                        hashMap.put("dateCreate", dateCreate+" "+dateSelect);
                         hashMap.put("dateId", remindListData.getDateId());
                         addRemindPresenter.revampRemindInfo(hashMap);
                     }

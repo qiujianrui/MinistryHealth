@@ -34,8 +34,6 @@ import com.yhjx.ministryhealth.mvp.presenter.AddRemindPresenter;
 import com.yhjx.ministryhealth.util.DataUtil;
 import com.yhjx.ministryhealth.view.popup.SearchDrugAdapter;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -68,11 +66,12 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
     private SearchDrugAdapter searchDrugAdapter;
     private boolean isSearchSelect;
     private int searchEditState; // 1 药品 2 长针剂
-    private String dateSelect="";
+    private String dateSelect = "";
 
     private AddRemindPresenter addRemindPresenter;
 
     private RemindListBean remindListData;
+    private TextView tvTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +106,7 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
         searchDrugAdapter = new SearchDrugAdapter();
         listSearch.setLayoutManager(new LinearLayoutManager(this));
         listSearch.setAdapter(searchDrugAdapter);
+        tvTitle = findViewById(R.id.tv_title);
     }
 
 
@@ -116,10 +116,11 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
         dateCreate = getIntent().getStringExtra("dateCreate");
         addMedicinePresenter = new AddMedicinePresenter(this, this);
 
-        remindListData= (RemindListBean) getIntent().getSerializableExtra("data");
+        remindListData = (RemindListBean) getIntent().getSerializableExtra("data");
         //修改 获取数据
-        if (remindListData!=null){
-            if (remindListData.getType().equals("0")){
+        if (remindListData != null) {
+            tvTitle.setText("修改记录");
+            if (remindListData.getType().equals("0")) {
                 llTypeMedicine.setVisibility(View.VISIBLE);
                 tvTime.setText(remindListData.getDateStart());
                 editMedicineName.setText(remindListData.getDrugName());
@@ -129,12 +130,12 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
                 editDrugLongName.setText(remindListData.getDrugLongName());
                 editDateLong.setText(remindListData.getDateLong());
                 editDrugLongNum.setText(remindListData.getDrugLongNum());
-            }else if (remindListData.getType().equals("1")){
+            } else if (remindListData.getType().equals("1")) {
                 llTypeMedicine.setVisibility(View.GONE);
                 tvTime.setText(remindListData.getDateCreate());
             }
-            dateCreate=remindListData.getDateEnd();
-            dateSelect=remindListData.getDateStart()+":00";
+            dateCreate = remindListData.getDateEnd();
+            dateSelect = remindListData.getDateStart() + ":00";
         }
     }
 
@@ -143,7 +144,7 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
         scrollLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction()==MotionEvent.ACTION_DOWN){
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     listSearch.setVisibility(View.GONE);
                 }
                 return false;
@@ -152,11 +153,11 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
         searchDrugAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                isSearchSelect=true;
-                if (searchEditState==1){
+                isSearchSelect = true;
+                if (searchEditState == 1) {
                     editMedicineName.setText(searchDrugAdapter.getData().get(position).getName());
                 }
-                if (searchEditState==2){
+                if (searchEditState == 2) {
                     editDrugLongName.setText(searchDrugAdapter.getData().get(position).getName());
                 }
                 listSearch.setVisibility(View.GONE);
@@ -178,13 +179,13 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
             public void afterTextChanged(Editable s) {
                 if (!s.toString().isEmpty()) {
                     if (!isSearchSelect) {
-                        searchEditState=1;
+                        searchEditState = 1;
                         addRemindPresenter.getDrug(s.toString());
                     }
-                }else {
+                } else {
                     listSearch.setVisibility(View.GONE);
                 }
-                isSearchSelect=false;
+                isSearchSelect = false;
             }
         });
         editDrugLongName.addTextChangedListener(new TextWatcher() {
@@ -202,13 +203,13 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
             public void afterTextChanged(Editable s) {
                 if (!s.toString().isEmpty()) {
                     if (!isSearchSelect) {
-                        searchEditState=2;
+                        searchEditState = 2;
                         addRemindPresenter.getDrug(s.toString());
                     }
-                }else {
+                } else {
                     listSearch.setVisibility(View.GONE);
                 }
-                isSearchSelect=false;
+                isSearchSelect = false;
             }
         });
     }
@@ -223,7 +224,7 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
                 TimePickerView pvTime = new TimePickerBuilder(this, new OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {//选中事件回调
-                        dateSelect=DataUtil.getDateHMS(date);
+                        dateSelect = DataUtil.getDateHMS(date);
                         tvTime.setText(DataUtil.getDateHM(date));
 
                     }
@@ -245,39 +246,39 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
                     ToastUtils.showShort("请选取日期");
                     return;
                 }
-                    if (editMedicineName.getText().toString().isEmpty()&&editDrugLongName.getText().toString().isEmpty()){
-                        ToastUtils.showShort("请输入药品名称或长效针剂名称");
+                if (editMedicineName.getText().toString().isEmpty() && editDrugLongName.getText().toString().isEmpty()) {
+                    ToastUtils.showShort("请输入药品名称或长效针剂名称");
+                    return;
+                }
+                if (!editMedicineName.getText().toString().isEmpty() && editForenoonDose.getText().toString().isEmpty() &&
+                        editNoonDose.getText().toString().isEmpty() &&
+                        editAfternoonDose.getText().toString().isEmpty()
+                ) {
+                    ToastUtils.showShort("请输入药品剂量");
+                    return;
+                }
+                if (!editDrugLongName.getText().toString().isEmpty()) {
+                    if (editDateLong.getText().toString().isEmpty() || editDrugLongNum.getText().toString().isEmpty()) {
+                        ToastUtils.showShort("请输入长效针剂时间及剂量");
                         return;
                     }
-                    if (!editMedicineName.getText().toString().isEmpty()&&editForenoonDose.getText().toString().isEmpty()&&
-                            editNoonDose.getText().toString().isEmpty()&&
-                            editAfternoonDose.getText().toString().isEmpty()
-                    ){
-                        ToastUtils.showShort("请输入药品剂量");
-                        return;
-                    }
-                    if (!editDrugLongName.getText().toString().isEmpty()){
-                        if (editDateLong.getText().toString().isEmpty()||editDrugLongNum.getText().toString().isEmpty()){
-                            ToastUtils.showShort("请输入长效针剂时间及剂量");
-                            return;
-                        }
-                    }
-                    HashMap<String, Object> hashMap = new HashMap<>();
-                    hashMap.put("type", "0");
-                    hashMap.put("remindData", "服药提醒");
+                }
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put("type", "0");
+                hashMap.put("remindData", "服药提醒");
 
-                    hashMap.put("dateCreate", dateCreate+" "+dateSelect);
-                    hashMap.put("drugName",editMedicineName.getText().toString());
-                    hashMap.put("forenoon",editForenoonDose.getText().toString());
-                    hashMap.put("noon",editNoonDose.getText().toString());
-                    hashMap.put("afternoon",editAfternoonDose.getText().toString());
-                    hashMap.put("drugLongName",editDrugLongName.getText().toString());
-                    hashMap.put("dateLong",editDateLong.getText().toString());
-                    hashMap.put("drugLongNum",editDrugLongNum.getText().toString());
-                if (remindListData==null) {
+                hashMap.put("dateCreate", dateCreate + " " + dateSelect);
+                hashMap.put("drugName", editMedicineName.getText().toString());
+                hashMap.put("forenoon", editForenoonDose.getText().toString());
+                hashMap.put("noon", editNoonDose.getText().toString());
+                hashMap.put("afternoon", editAfternoonDose.getText().toString());
+                hashMap.put("drugLongName", editDrugLongName.getText().toString());
+                hashMap.put("dateLong", editDateLong.getText().toString());
+                hashMap.put("drugLongNum", editDrugLongNum.getText().toString());
+                if (remindListData == null) {
                     addRemindPresenter.addRemindDrug(hashMap);
-                }else {
-                    hashMap.put("dateId",remindListData.getDateId());
+                } else {
+                    hashMap.put("dateId", remindListData.getDateId());
                     addRemindPresenter.revampRemindInfo(hashMap);
                 }
                 break;
@@ -301,7 +302,7 @@ public class AddRecordActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void getDrugSuccess(List<DrugNameBean> data) {
-        if (data.size()>0) {
+        if (data.size() > 0) {
             listSearch.setVisibility(View.VISIBLE);
             searchDrugAdapter.setList(data);
         }
